@@ -1,1 +1,28 @@
+server:
+  port: 8001
 
+spring:
+  application:
+    name: flash-memorizer-app
+
+  devtools:
+    livereload:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3307/FlashMemorizer?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: root
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
