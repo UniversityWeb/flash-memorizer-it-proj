@@ -46,25 +46,25 @@
                             <div class="flip_card_inner">
                                 <div class="flip_card_front flip_card_content">
                                     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-                                    <c:if test="${card.contentFont != null}">
+                                    <c:if test="${card.term != null}">
                                         <button class="button_read" onclick="readContentAndStopPropagation(event)">
                                             <ion-icon name="volume-medium-outline"></ion-icon>
                                         </button>
-                                        <p class="flip_card_text">${card.contentFont}</p>
+                                        <p class="flip_card_text">${card.term}</p>
                                     </c:if>
-                                    <c:if test="${card.contentFont == null}">
+                                    <c:if test="${card.term == null}">
                                         <img src="../static/images/empty.gif" class="empty">
                                     </c:if>
                                 </div>
                                 <div class="flip_card_back flip_card_content">
                                     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-                                    <c:if test="${card.contentBack != null}">
+                                    <c:if test="${card.desc != null}">
                                         <button class="button_read" onclick="readContentAndStopPropagation(event)">
                                             <ion-icon name="volume-medium-outline"></ion-icon>
                                         </button>
-                                        <p class="flip_card_text">${card.contentBack}</p>
+                                        <p class="flip_card_text">${card.desc}</p>
                                     </c:if>
-                                    <c:if test="${card.contentBack == null}">
+                                    <c:if test="${card.desc == null}">
                                         <img src="../static/images/empty.gif" class="empty">
                                     </c:if>
                                 </div>
