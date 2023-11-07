@@ -1,0 +1,12 @@
+package com.uniteam.flashmemorizer.service;
+
+import com.uniteam.flashmemorizer.dto.CardDTO;
+import com.uniteam.flashmemorizer.dto.review.CardReview;
+import com.uniteam.flashmemorizer.customenum.EReview;
+
+import java.util.List;
+
+public interface CardReviewService<T extends CardReview> {
+    List<T> generateTest(EReview eReview, List<CardDTO> cards);
+    String getResult(EReview eReview, List<T> cardReviews);
+}
