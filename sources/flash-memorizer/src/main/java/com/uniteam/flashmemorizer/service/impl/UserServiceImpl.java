@@ -2,12 +2,12 @@ package com.uniteam.flashmemorizer.service.impl;
 
 import com.uniteam.flashmemorizer.converter.UserConverter;
 import com.uniteam.flashmemorizer.dto.UserDTO;
+import com.uniteam.flashmemorizer.dto.UserHolder;
 import com.uniteam.flashmemorizer.entity.User;
 import com.uniteam.flashmemorizer.entity.VerificationToken;
 import com.uniteam.flashmemorizer.exception.PasswordMismatchException;
 import com.uniteam.flashmemorizer.exception.UserNotFoundException;
 import com.uniteam.flashmemorizer.form.ChangePassForm;
-import com.uniteam.flashmemorizer.record.LoginRequest;
 import com.uniteam.flashmemorizer.record.RegistrationRequest;
 import com.uniteam.flashmemorizer.repository.UserRepository;
 import com.uniteam.flashmemorizer.repository.VerificationTokenRepository;
@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -99,16 +101,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO loginUser(LoginRequest login) {
-        UserDTO user = this.findByUsername(login.username());
-        if(user != null){
-            String password = login.password();
-            String endcodedPassword = user.getPass();
-            if(passwordEncoder.matches(password, endcodedPassword)){
-                return user;
-            }
+    public Long getCurrentUserId() {
+        try{
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            UserHolder user = (UserHolder) authentication.getPrincipal();
+            return user.getUserHolder().getId();
+        } catch (Exception e){
+            log.error(e.getMessage());
+            return null;
         }
-        return null;
     }
 
     @Override

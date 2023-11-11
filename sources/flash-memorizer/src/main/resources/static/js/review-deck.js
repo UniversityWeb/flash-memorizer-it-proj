@@ -4,14 +4,24 @@ const wrapper = document.querySelector(".wrapper"),
     flip_card_frame = document.querySelectorAll(".flip_card_frame"),
     button = document.querySelectorAll(".flip_cards_button"),
     flip_card_index = document.querySelector(".flip_card_index"),
-    flip_card_total = document.querySelector(".flip_card_total")
+    flip_card_total_element = document.querySelector(".flip_card_total");
+
 process_bar = document.querySelector(".process_bar");
 
 console.log(wrapper, flip_cards, flip_card_frame, button, flip_card_index);
 
-let cardIndex = 0, intervalId;
 
-flip_card_total.innerHTML = flip_card_frame.length;
+let cardIndex = 0, intervalId,
+    flip_card_total = parseInt(flip_card_total_element.textContent);
+
+if (flip_card_total > 0){
+    flip_card_index.innerHTML = cardIndex + 1;
+    process_bar.style.width = `${((cardIndex+1)/flip_card_total)*100}%`;
+}
+else{
+    flip_card_index.innerHTML = cardIndex;
+    process_bar.style.width = `100%`;
+}
 
 const autoSlide = () => {
     intervalId = setInterval(() => slideCard(++cardIndex),2000);
@@ -19,23 +29,24 @@ const autoSlide = () => {
 
 const slideCard = () => {
     console.log(cardIndex);
-    cardIndex = cardIndex === flip_card_frame.length ? 0: cardIndex < 0 ? flip_card_frame.length - 1: cardIndex;
+    cardIndex = cardIndex === flip_card_total ? 0: cardIndex < 0 ? flip_card_total - 1: cardIndex;
     flip_cards.style.transform = `translate(-${cardIndex*100}%)`
 }
 
 const updateClick = (e) => {
-    clearInterval(intervalId);
-    cardIndex += e.target.id === "next" ? 1 : -1;
-    slideCard(cardIndex);
-    console.log(cardIndex);
-    flip_card_index.innerHTML = cardIndex + 1;
-    process_bar.style.width = `${((cardIndex+1)/flip_card_frame.length)*100}%`
+    if (flip_card_total > 0){
+        clearInterval(intervalId);
+        cardIndex += e.target.id === "next" ? 1 : -1;
+        slideCard(cardIndex);
+        console.log(cardIndex);
+        flip_card_index.innerHTML = cardIndex + 1;
+        process_bar.style.width = `${((cardIndex+1)/flip_card_total)*100}%`;
+    }
 }
 
 button.forEach((element) => element.addEventListener("click", updateClick));
 
 wrapper.addEventListener("mouseover", ()=> clearInterval(intervalId))
-wrapper.addEventListener("mouseleave", ()=> autoSlide)
 
 function toggleFlip(card){
     card.classList.toggle("flipped");
@@ -43,7 +54,7 @@ function toggleFlip(card){
 
 function readContent(element) {
     var textToRead = element.querySelector('.flip_card_text').textContent;
-    var speechSynthesis = window.speechSynthesis;
+    var speechSynthesis = window.speechSynthesis || new SpeechSynthesis();
     var utterance = new SpeechSynthesisUtterance(textToRead);
 
     utterance.voice = speechSynthesis.getVoices().find(function(voice) {
@@ -55,6 +66,7 @@ function readContent(element) {
 
 function readContentAndStopPropagation(event) {
     event.stopPropagation();
+<<<<<<< HEAD
     readContent(event.target.closest('.flip_card_content'));
 }
 =======
@@ -189,3 +201,7 @@ function playSound(button) {
         });
 }
 >>>>>>> 564a774 (add multi choice test)
+=======
+    readContent(event.target.closest('.flip_card_content'), false);
+}
+>>>>>>> 376af90 (Convert jsp to html use theamleaf, add return button in view deck, hidden userId)

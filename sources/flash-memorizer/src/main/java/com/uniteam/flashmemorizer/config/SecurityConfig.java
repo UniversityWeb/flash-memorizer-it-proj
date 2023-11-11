@@ -56,7 +56,6 @@ public class SecurityConfig {
         return  provider;
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.cors(withDefaults())
@@ -67,7 +66,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/register-process").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/register-process/verifyEmail").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/user/edit/{id}").hasAnyRole("USERS", "ADMIN"))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/decks/get-my-decks/{id}").hasAnyRole("USERS", "ADMIN"))
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/decks/get-my-decks").hasAnyRole("USERS", "ADMIN"))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/admin").hasRole("ADMIN"))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/**").authenticated())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/decks/**").permitAll())

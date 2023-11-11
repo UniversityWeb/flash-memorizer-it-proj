@@ -45,7 +45,7 @@
                                         </a>
 
                                         <a class="btn btn-outline-danger btn-sm delete-button"
-                                           th:href="@{/decks/delete(userId=${curDeck.user.id}, deckId=${curDeck.id})}">
+                                           th:href="@{/decks/delete}">
                                             <i class="fas fa-trash"></i> Delete
                                         </a>
                                     </div>
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-2 mb-3">
-                        <a class="btn btn-outline-success" th:href="@{/decks/input(userId=${userId})}">
+                        <a class="btn btn-outline-success" th:href="@{/decks/input}">
                             <i class="fas fa-plus"></i> Add Another Deck
                         </a>
                     </div>

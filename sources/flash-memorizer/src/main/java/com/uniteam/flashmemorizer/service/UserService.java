@@ -3,7 +3,6 @@ package com.uniteam.flashmemorizer.service;
 import com.uniteam.flashmemorizer.dto.UserDTO;
 import com.uniteam.flashmemorizer.entity.VerificationToken;
 import com.uniteam.flashmemorizer.form.ChangePassForm;
-import com.uniteam.flashmemorizer.record.LoginRequest;
 import com.uniteam.flashmemorizer.record.RegistrationRequest;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface UserService {
     List<UserDTO> getUsers();
     UserDTO findByEmail(String email);
     UserDTO findByUsername(String username);
-    UserDTO loginUser(LoginRequest login);
+    Long getCurrentUserId();
     UserDTO registerUser(RegistrationRequest request);
     boolean isExistsEmail(String email);
     boolean isExistUsername(String username);
