@@ -32,5 +32,4 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
         return new UserHolder(user, authorities);
     }
-<<<<<<< HEAD
 }
