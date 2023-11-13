@@ -54,6 +54,7 @@ public class DataInitializer implements CommandLineRunner {
                         .registration(new Date(2023, 1, 1, 12, 12, 12))
                         .lastLogin(new Date(2023, 1, 2, 4, 12, 12))
                         .role("ADMIN")
+                        .isEnabled(true)
                         .build(),
                 User.builder()
                         .username("username2")
@@ -63,6 +64,7 @@ public class DataInitializer implements CommandLineRunner {
                         .registration(new Date(2023, 4, 4, 5, 5, 5))
                         .lastLogin(new Date(2023, 3, 1, 4, 5, 6))
                         .role("USERS")
+                        .isEnabled(true)
                         .build()
         );
         return userRepo.saveAll(users);

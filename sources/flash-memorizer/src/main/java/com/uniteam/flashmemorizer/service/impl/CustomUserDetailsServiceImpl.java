@@ -25,11 +25,16 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByUsername(username);
 
         if (user == null) {
+            System.out.println("User not found");
             throw new UsernameNotFoundException("User not found");
+        }
+        if (!user.isEnabled()){
+            System.out.println("Unverified account");
+            throw new UsernameNotFoundException("Unverified account");
         }
 
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
 
-        return new UserHolder(user, authorities);
+        return new UserHolder(user, authorities);}
     }
-}
+

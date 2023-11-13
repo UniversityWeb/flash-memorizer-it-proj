@@ -16,30 +16,12 @@
     </nav>
 </header>
 
-<div class="message-error" th:if="${param.loginFailed}">
+<div class="message-error" th:if="${param.loginFailed} or ${param.passwordNotMatch} or ${param.isExistsUsername} or ${param.isExistsEmail}">
     <div class="message-content">
-        <p>Incorrect account or password!</p>
-        <span class="message-close">&times;</span>
-    </div>
-</div>
-
-<div class="message-error" th:if="${param.isExistsEmail}">
-    <div class="message-content">
-        <p>Email already exists!</p>
-        <span class="message-close">&times;</span>
-    </div>
-</div>
-
-<div class="message-error" th:if="${param.isExistsUsername}">
-    <div class="message-content">
-        <p>The username already exists!</p>
-        <span class="message-close">&times;</span>
-    </div>
-</div>
-
-<div class="message-error" th:if="${param.passwordNotMatch}">
-    <div class="message-content">
-        <p>Passwords do not match!</p>
+        <p th:if="${param.loginFailed}">Incorrect account or password!</p>
+        <p th:if="${param.passwordNotMatch}">Passwords do not match!</p>
+        <p th:if="${param.isExistsUsername}">The username already exists!</p>
+        <p th:if="${param.isExistsEmail}">Email already exists!</p>
         <span class="message-close">&times;</span>
     </div>
 </div>

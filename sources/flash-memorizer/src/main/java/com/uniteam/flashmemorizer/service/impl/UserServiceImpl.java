@@ -7,6 +7,7 @@ import com.uniteam.flashmemorizer.entity.User;
 import com.uniteam.flashmemorizer.entity.VerificationToken;
 import com.uniteam.flashmemorizer.exception.PasswordMismatchException;
 import com.uniteam.flashmemorizer.exception.UserNotFoundException;
+import com.uniteam.flashmemorizer.exception.VerificationTokenNotFoundException;
 import com.uniteam.flashmemorizer.form.ChangePassForm;
 import com.uniteam.flashmemorizer.record.RegistrationRequest;
 import com.uniteam.flashmemorizer.repository.UserRepository;
@@ -21,10 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +31,7 @@ public class UserServiceImpl implements UserService {
     private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepo;
+    private final VerificationTokenRepository verificationTokenRepo;
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository tokenRepository;;
     private final UserConverter userConverter;
@@ -206,5 +205,32 @@ public class UserServiceImpl implements UserService {
             log.error(e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public void deleteUnverifiedUsers(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(new Date().getTime());
+        calendar.add(Calendar.HOUR, -24);
+        List<User> users = userRepo.findAll();
+        for (User user: users) {
+            if(!user.isEnabled()){
+                try {
+                    VerificationToken verificationToken = getVerificationTokenByUser(user);
+                    if (verificationToken.getTokenExpirationTime().getTime() - calendar.getTime().getTime() <= 0) {
+                        verificationTokenRepo.delete(verificationToken);
+                        userRepo.delete(user);
+                    }
+                } catch (Exception e){
+                    userRepo.delete(user);
+                    log.error(e.getMessage());
+                }
+            }
+        }
+    }
+
+    private VerificationToken getVerificationTokenByUser(User user){
+        return verificationTokenRepo.findByUser(user)
+                .orElseThrow(() -> new VerificationTokenNotFoundException("Could not find any tokens with userId=" + user.getId()));
     }
 }
