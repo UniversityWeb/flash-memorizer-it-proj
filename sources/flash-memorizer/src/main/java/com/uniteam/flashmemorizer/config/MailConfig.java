@@ -18,7 +18,7 @@ public class MailConfig {
         //Mail - source
         mailSender.setUsername("vanantran009@gmail.com");
         //Pass
-        mailSender.setPassword("An@1234567890");
+        mailSender.setPassword("slqohvgrgtqkftbp");
 
         //Transport layer security
         Properties props = mailSender.getJavaMailProperties();

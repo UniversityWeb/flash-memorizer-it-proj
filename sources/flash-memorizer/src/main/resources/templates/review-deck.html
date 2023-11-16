@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Review Decks</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" th:href="@{/css/review-deck.css}" href="../static/css/review-deck.css">
+<body>
+<header>
+    <a class="button_back" th:href="@{/decks/get-my-decks}">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+    </a>
+    <h1>FlashCard</h1>
+</header>
+<section>
+    <div class="tools_content">
+        <div class="tool_item dropdown">
+            <ion-icon name="receipt-outline"></ion-icon>
+            <h3>Test</h3>
+            <ion-icon name="chevron-down-outline"></ion-icon>
+            <div class="dropdown_menu">
+                <a class="dropdown-item" href="#">Multi Choice</a>
+                <a class="dropdown-item" href="#">Fill Blank</a>
+                <a class="dropdown-item" href="#">Match</a>
+            </div>
+        </div>
+        <div class="tool_item">
+            <ion-icon name="share-social-outline"></ion-icon>
+            <h3>Share</h3>
+            <ion-icon name="open-outline"></ion-icon>
+        </div>
+        <div class="tool_item">
+            <ion-icon name="pencil-outline"></ion-icon>
+            <h3>Edit</h3>
+        </div>
+    </div>
+    <div class="flip_cards_content">
+        <div class="wrapper">
+            <div class="flip_cards-container">
+                <div class="flip_cards">
+                    <div th:each="card, stat : ${deckForm.cards}" class="flip_card_frame" th:onclick="'toggleFlip(this)'">
+                        <div class="flip_card_inner">
+                            <div class="flip_card_front flip_card_content" th:if="${card.term != null}">
+                                <button class="button_read" th:onclick="'readContentAndStopPropagation(event)'">
+                                    <ion-icon name="volume-medium-outline"></ion-icon>
+                                </button>
+                                <p class="flip_card_text" th:inline="text" th:utext="${card.term}"></p>
+                            </div>
+                            <div class="flip_card_front flip_card_content" th:if="${card.term == null}">
+                                <img src="../static/images/empty_img.gif" th:src="@{/images/empty_img.gif}" class="empty">
+                            </div>
+                            <div class="flip_card_back flip_card_content" th:if="${card.desc != null}">
+                                <button class="button_read" th:onclick="'readContentAndStopPropagation(event)'">
+                                    <ion-icon name="volume-medium-outline"></ion-icon>
+                                </button>
+                                <p class="flip_card_text" th:inline="text" th:utext="${card.desc}"></p>
+                            </div>
+                            <div class="flip_card_back flip_card_content" th:if="${card.desc == null}">
+                                <img src="../static/images/empty_img.gif" th:src="@{/images/empty_img.gif}" class="empty">
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${deckForm.cards.isEmpty()}" class="flip_card_frame-empty">
+                        <img src="../static/images/empty_img.gif" th:src="@{/images/empty_img.gif}" class="empty">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flip_card_controls" th:if="${!deckForm.cards.isEmpty()}">
+            <ion-icon name="arrow-back-outline" class="flip_cards_button" id="prev"></ion-icon>
+
+            <div class="flip_card_count">
+                <p class="flip_card_index"></p>
+                <p>&sol;</p>
+                <p class="flip_card_total" th:text="${#lists.size(deckForm.cards)}"></p>
+            </div>
+
+            <ion-icon name="arrow-forward-outline" class="flip_cards_button" id="next"></ion-icon>
+        </div>
+        <div class="process_bar_container" th:if="${!deckForm.cards.isEmpty()}">
+            <div class="process_bar"></div>
+        </div>
+    </div>
+</section>
+
+<script th:src="@{/js/review-deck.js}" src="../static/js/review-deck.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

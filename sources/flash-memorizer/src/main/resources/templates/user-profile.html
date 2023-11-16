@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <link rel="stylesheet" th:href="@{/css/user-profile.css}" href="../static/css/user-profile.css">
+</head>
+<body>
+<header>
+    <h1 class="logo">Flash Card</h1>
+    <div class="control">
+        <div class="avartar_user-frame">
+            <img class="avartar_user-image" src="vi_em_tat_ca.jpg" alt="avatar">
+        </div>
+        <div class="control-menu">
+            <a class="control-item" th:href="@{/user/edit}">Information</a>
+            <a class="control-item" th:href="@{/decks/get-my-decks}">My Deck</a>
+            <a class="control-item" th:href="@{/logout}">Log out</a>
+        </div>
+    </div>
+</header>
+<section>
+    <div class="avatar">
+        <div id="avartar_user-frame">
+            <img id="avartar_user-image" alt="Uploaded Image">
+        </div>
+        <div class="avatar_control">
+            <input type="file" class="avatar_control-item" id="image_button-load" accept="image/*" onchange="displayImage(this)">
+            <input type="button" class="avatar_control-item" id="image_button-save" value="Save">
+        </div>
+    </div>
+    <div class="full_name">
+        <h1 th:text="${user.username}"></h1>
+    </div>
+    <div class="information">
+        <div class="information-line">
+            <label>Username:</label>
+            <input type="text" th:value="${user.username}">
+        </div>
+        <div class="information-line">
+            <label>Email:</label>
+            <input type="text" th:value="${user.email}">
+        </div>
+        <div class="information-line">
+            <label>Full Name:</label>
+            <input type="text" th:value="${user.fullName}">
+        </div>
+        <div class="information-line">
+            <a class="button-change-password">
+                <ion-icon name="key-outline"></ion-icon>
+                <p>Change Password</p>
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+            </a>
+        </div>
+    </div>
+    <div class="information_control">
+        <button href="" class="information_control-item edit-button">
+            <p>Edit Profile</p>
+            <ion-icon name="create-outline"></ion-icon>
+        </button>
+
+        <a href="" class="information_control-item delete-button">
+            <p>Delete Account</p>
+            <ion-icon name="trash-outline"></ion-icon>
+        </a>
+    </div>
+</section>
+
+
+<script th:src="@{/js/user-profile.js}" src="../static/js/user-profile.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -49,6 +49,6 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<UserCard> userCards;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<VerificationToken> verificationTokens;
+    @OneToOne(mappedBy = "user", orphanRemoval = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private VerificationToken verificationToken;
 }

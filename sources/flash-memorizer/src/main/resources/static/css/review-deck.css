@@ -25,6 +25,27 @@ header{
 
 header h1{
     color: #4255FF;
+    position: absolute;
+}
+
+header .button_back{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 10px;
+    margin-right: auto;
+}
+
+.button_back ion-icon{
+    width: 30px;
+    height: 30px;
+    color: #4255FF;
+}
+
+.button_back:hover ion-icon{
+    width: 35px;
+    height: 35px;
 }
 
 section{
@@ -143,14 +164,26 @@ section{
     transition: all 0.4s;
 }
 
-.flip_cards .flip_card_frame {
+.flip_cards .flip_card_frame{
     width: 100%;
     height: 100%;
-    border-radius: 18px;
     object-fit: cover;
     perspective: 1000px;
-    background-color: transparent;
     cursor: pointer;
+}
+
+.flip_cards .flip_card_frame-empty{
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    transform: translateX(6%) translateY(20%);
+}
+
+.flip_cards .flip_card_frame,
+.flip_cards .flip_card_frame-empty{
+    border-radius: 18px;
+    background-color: transparent;
 }
 
 .flip_card_inner {

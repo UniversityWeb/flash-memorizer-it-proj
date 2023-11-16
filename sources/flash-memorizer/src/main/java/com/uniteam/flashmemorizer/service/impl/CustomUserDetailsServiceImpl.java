@@ -1,9 +1,5 @@
 package com.uniteam.flashmemorizer.service.impl;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8eb0604 (load account from db to verify)
 import com.uniteam.flashmemorizer.dto.UserHolder;
 import com.uniteam.flashmemorizer.entity.User;
 import com.uniteam.flashmemorizer.repository.UserRepository;
@@ -13,19 +9,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-<<<<<<< HEAD
-import org.springframework.stereotype.Component;
-=======
->>>>>>> 8eb0604 (load account from db to verify)
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
 
-<<<<<<< HEAD
-@Component
-=======
->>>>>>> 8eb0604 (load account from db to verify)
 @Service
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
@@ -37,15 +25,16 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByUsername(username);
 
         if (user == null) {
+            System.out.println("User not found");
             throw new UsernameNotFoundException("User not found");
+        }
+        if (!user.isEnabled()){
+            System.out.println("Unverified account");
+            throw new UsernameNotFoundException("Unverified account");
         }
 
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
 
-        return new UserHolder(user, authorities);
+        return new UserHolder(user, authorities);}
     }
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 8eb0604 (load account from db to verify)
+

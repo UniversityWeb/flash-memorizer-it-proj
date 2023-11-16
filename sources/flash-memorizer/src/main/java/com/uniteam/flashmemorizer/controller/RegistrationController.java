@@ -62,6 +62,8 @@ public class RegistrationController {
         if(theToken == null)
             model.addAttribute("message", "Token not found!");
 
+        model.addAttribute("message", "Invalid verification link, please, check your email for new verification link.");
+
         String verificationResult = userService.validateToken(token);
 
         if(verificationResult.equalsIgnoreCase("valid")) {
@@ -69,8 +71,6 @@ public class RegistrationController {
             model.addAttribute("valid", true);
             model.addAttribute("message", "Email verified successfully. Now you can login account!");
         }
-
-        model.addAttribute("message", "Invalid verification link, please, check your email for new verification link. </a>" );
 
         return "verify-email";
     }

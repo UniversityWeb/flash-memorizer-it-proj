@@ -3,13 +3,17 @@ package com.uniteam.flashmemorizer.controller;
 import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.dto.DeckDTO;
 import com.uniteam.flashmemorizer.dto.UserDTO;
+import com.uniteam.flashmemorizer.entity.Deck;
 import com.uniteam.flashmemorizer.exception.DeckNotFoundException;
 import com.uniteam.flashmemorizer.form.DeckForm;
 import com.uniteam.flashmemorizer.service.CardService;
 import com.uniteam.flashmemorizer.service.DeckService;
+import com.uniteam.flashmemorizer.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +35,13 @@ public class DeckController {
     @Autowired
     private CardService cardService;
 
-    @GetMapping("/get-my-decks/{userId}")
-    public String getDecksByUserId(@PathVariable Long userId, Model m) {
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/get-my-decks")
+    public String getDecksByUserId(Model m) {
         List<DeckDTO> decks;
+        Long userId = userService.getCurrentUserId();
         try {
             decks = deckService.getByUser(userId);
             for (DeckDTO deck : decks) {
@@ -46,12 +54,12 @@ public class DeckController {
             decks = new ArrayList<>();
         }
         m.addAttribute("decks", decks);
-        m.addAttribute("userId", userId);
         return "edit-decks";
     }
 
     @GetMapping("/input")
-    public String inputForm(@RequestParam Long userId, Model m) {
+    public String inputForm(Model m) {
+        Long userId = userService.getCurrentUserId();
         UserDTO user = UserDTO.builder().id(userId).build();
         DeckDTO newDeckOfUser = DeckDTO.builder().user(user).build();
         m.addAttribute("deck", newDeckOfUser);
@@ -77,7 +85,6 @@ public class DeckController {
     @GetMapping("/review/{deckId}")
     public String getDeckToReview(@PathVariable Long deckId, Model m) {
         getDeckDetails(deckId, m);
-        m.addAttribute("shareUrl", "HIHIHIHI");
         return "review-deck";
     }
 
@@ -128,7 +135,7 @@ public class DeckController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam Long userId, @RequestParam Long deckId, RedirectAttributes ra) {
+    public String delete(@RequestParam Long deckId, RedirectAttributes ra) {
         try {
             deckService.delete(deckId);
             log.info("Deck with Id {} deleted successfully!", deckId);
@@ -137,6 +144,6 @@ public class DeckController {
             log.error("Error deleting deckForm with Id {}: {}", deckId, e.getMessage());
             ra.addFlashAttribute("errorMsg", e.getMessage());
         }
-        return "redirect:/decks/get-my-decks?userId=" + userId;
+        return "redirect:/decks/get-my-decks";
     }
 }
