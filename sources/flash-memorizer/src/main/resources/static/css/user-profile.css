@@ -71,7 +71,7 @@ header .control{
     display: flex;
     flex-direction: column;
     color: #fff;
-    z-index: 1;
+    z-index: 99;
     display: none;
 }
 

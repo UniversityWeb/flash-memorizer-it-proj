@@ -24,7 +24,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("")
+@RequestMapping("/user")
 public class UserController {
 
     private final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -37,7 +37,7 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping("/user/edit")
+    @GetMapping("/edit")
     public String getDetails(Model m) {
         Long id = userService.getCurrentUserId();
         UserDTO userHolder = userService.getById(id);
@@ -48,7 +48,7 @@ public class UserController {
         return "user-profile";
     }
 
-    @PostMapping("/user/update")
+    @PostMapping("/update")
     public String update(@ModelAttribute("user") UserDTO user, RedirectAttributes ra) {
         try {
             Long userID = userService.getCurrentUserId();
@@ -63,14 +63,14 @@ public class UserController {
         return "redirect:/user/edit";
     }
 
-    @PostMapping("/user/delete")
+    @PostMapping("/delete")
     public String delete() throws UserNotFoundException {
         Long userID = userService.getCurrentUserId();
         userService.delete(userID);
         return "redirect:/home";
     }
 
-    @PostMapping("/user/change-password")
+    @PostMapping("/change-password")
     public String changePassword(ChangePassForm passForm, RedirectAttributes ra) {
         try {
             Long userID = userService.getCurrentUserId();
