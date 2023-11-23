@@ -32,8 +32,7 @@
             <div class="accordion-body">
                 <div class="card">
                     <div class="card-body">
-                        <form th:action="@{/users/update}" method="post" id="userForm" th:object="${user}" class="row g-3">
-                            <input type="hidden" th:field="*{id}" />
+                        <form th:action="@{/user/update}" method="post" id="userForm" th:object="${user}" class="row g-3">
                             <div class="col-md-6">
                                 <label for="inputFullName" class="form-label">Full Name</label>
                                 <input type="text" class="form-control" id="inputFullName" placeholder="A B C" th:field="*{fullName}">
@@ -71,8 +70,7 @@
                     <div class="card-body">
                         <p class="card-text">Your password must be at least 6 characters and should include
                             a combination of numbers, letters and special characters (!$@%).</p>
-                        <form th:action="@{/users/change-password}" method="post" id="changePassForm" th:object="${passForm}" class="row g-3">
-                            <input type="hidden" th:field="*{userId}" />
+                        <form th:action="@{/user/change-password}" method="post" id="changePassForm" th:object="${passForm}" class="row g-3">
                             <div class="col-md-7">
                                 <label for="inputCurPassword">Current password</label>
                                 <div class="input-group">
@@ -93,10 +91,6 @@
                                     <input type="password" class="form-control" id="inputReTypeNewPassword" name="reTypeNewPass" th:value="${passForm.reTypeNewPass}"/>
                                     <button type="button" id="toggleReTypeNewPassword" class="btn btn-secondary" onclick="toggleReTypeNewPasswordVisibility()">Show/Hide</button>
                                 </div>
-                            </div>
-
-                            <div class="col-12 mt-1">
-                                <a th:href="@{/login}" href="#">Forgot your password?</a>
                             </div>
 
                             <div class="col-12 mt-4">
@@ -120,8 +114,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Account Deletion</h5>
                         <p class="card-text">Warning: Deleting your account is irreversible. All your data will be permanently deleted.</p>
-                        <form th:action="@{/users/delete}" method="post" id="deleteForm" th:object="${user}">
-                            <input type="hidden" th:field="*{id}" />
+                        <form th:action="@{/user/delete}" method="post" id="deleteForm" th:object="${user}">
                             <button type="submit" class="btn btn-outline-danger">Delete Account</button>
                         </form>
                     </div>

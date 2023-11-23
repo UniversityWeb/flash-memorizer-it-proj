@@ -48,9 +48,11 @@ public class UserController {
         return "user-profile";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/user/update")
     public String update(@ModelAttribute("user") UserDTO user, RedirectAttributes ra) {
         try {
+            Long userID = userService.getCurrentUserId();
+            user.setId(userID);
             userService.updateNotPassword(user);
             log.info("User with userId: {} updated successfully!", user.getId());
             ra.addFlashAttribute("successMsg", "User updated successfully!");
@@ -58,49 +60,31 @@ public class UserController {
             log.error("Error updating user with userId: {}: {}", user.getId(), e.getMessage());
             ra.addFlashAttribute("errorMsg", e.getMessage());
         }
-        return "redirect:/users/edit?userId=" + user.getId();
+        return "redirect:/user/edit";
     }
 
-    @PostMapping("/delete")
-    public String delete(@ModelAttribute("user") UserDTO user) throws UserNotFoundException {
-        // handle logout account
-        //
-
-        userService.delete(user.getId());
-        return "redirect:/login";
+    @PostMapping("/user/delete")
+    public String delete() throws UserNotFoundException {
+        Long userID = userService.getCurrentUserId();
+        userService.delete(userID);
+        return "redirect:/home";
     }
 
-    @PostMapping("/change-password")
+    @PostMapping("/user/change-password")
     public String changePassword(ChangePassForm passForm, RedirectAttributes ra) {
         try {
+            Long userID = userService.getCurrentUserId();
+            passForm.setUserId(userID);
             userService.changePassword(passForm);
             log.info("Password changed for user with ID: {}", passForm.getUserId());
             ra.addFlashAttribute("successMsg", "Password updated successfully!");
         } catch (PasswordMismatchException e) {
-            log.error("Error while changing password with userId: {}", passForm.getUserId(),e);
+            log.error("Error while changing password with userId: {}", passForm.getUserId() ,e);
             ra.addFlashAttribute("errorMsg", "Password and confirmation do not match");
         } catch (UserNotFoundException e) {
             log.error(e.getMessage());
             return "redirect:/login";
         }
-        return "redirect:/users/edit?userId=" + passForm.getUserId();
-    }
-
-    @GetMapping("/user/{id}")
-    @PreAuthorize("#id == authentication.principal.userHolder.id")
-    public String getUserHome(@PathVariable("id") Long id, Model model, Authentication authentication) {
-        UserHolder userHolder = (UserHolder) authentication.getPrincipal();
-        model.addAttribute("fullName", userHolder.getUserHolder().getFullName());
-        model.addAttribute("returnUserHomeLink", "/user/" + userHolder.getUserHolder().getId());
-        model.addAttribute("editUserProfileLink", "/user/edit/" + userHolder.getUserHolder().getId());
-        model.addAttribute("getMyDecksLink", "/decks/get-my-decks/" + userHolder.getUserHolder().getId());
-        return "user-home";
-    }
-
-    @ResponseBody
-    @PostMapping("/get-by-username")
-    public UserDTO getByUsername (@RequestBody String username) {
-        var user = userService.findByUsername(username.replaceAll("\"", ""));
-        return user;
+        return "redirect:/user/edit";
     }
 }
