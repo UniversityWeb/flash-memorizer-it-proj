@@ -7,6 +7,7 @@ import com.uniteam.flashmemorizer.listener.RegistrationCompleteEventListener;
 import com.uniteam.flashmemorizer.entity.VerificationToken;
 import com.uniteam.flashmemorizer.repository.VerificationTokenRepository;
 
+import com.uniteam.flashmemorizer.utility.Utils;
 import jakarta.mail.MessagingException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -56,22 +57,14 @@ public class RegistrationController {
         Logger logger = Logger.getLogger(RegistrationController.class.getName());
         logger.info("Token: " + token);
 
-        VerificationToken theToken = tokenRepository.findByToken(token);
-
         model.addAttribute("valid", false);
-        if(theToken == null)
-            model.addAttribute("message", "Token not found!");
+        String message = userService.validateToken(token);
 
-        model.addAttribute("message", "Invalid verification link, please, check your email for new verification link.");
-
-        String verificationResult = userService.validateToken(token);
-
-        if(verificationResult.equalsIgnoreCase("valid")) {
-            theToken.getUser().setEnabled(true);
+        if(message.equalsIgnoreCase(Utils.SUCCESS_TOKEN_MSG)) {
             model.addAttribute("valid", true);
-            model.addAttribute("message", "Email verified successfully. Now you can login account!");
         }
 
+        model.addAttribute("message", message);
         return "verify-email";
     }
 
@@ -81,7 +74,7 @@ public class RegistrationController {
         VerificationToken verificationToken = userService.generateNewVerificationCode(oldToken);
         User theUser = verificationToken.getUser();
         resendVerificationTokenEmail(theUser, applicationUrl(request), verificationToken);
-        return "A new verification link has been sent to your email, please, check to active your account";
+        return Utils.RESEND_TOKEN_MSG;
     }
 
     private void resendVerificationTokenEmail(User theUser, String applicationUrl, VerificationToken verificationToken)

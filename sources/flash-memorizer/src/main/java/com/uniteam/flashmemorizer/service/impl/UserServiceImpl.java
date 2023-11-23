@@ -13,10 +13,10 @@ import com.uniteam.flashmemorizer.record.RegistrationRequest;
 import com.uniteam.flashmemorizer.repository.UserRepository;
 import com.uniteam.flashmemorizer.repository.VerificationTokenRepository;
 import com.uniteam.flashmemorizer.service.UserService;
+import com.uniteam.flashmemorizer.utility.Utils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername( userDTO.getUsername() );
         user.setEmail(userDTO.getEmail() );
         user.setFullName( userDTO.getFullName() );
+        user.setEnabled(userDTO.isEnabled());
 
         try {
             User updated = userRepo.save(user);
@@ -150,20 +151,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String validateToken(String theToken) {
+        if(theToken == null){
+            return Utils.INVALID_TOKEN_MSG;
+        }
         VerificationToken token = tokenRepository.findByToken(theToken);
         if(token == null){
-            return "Invalid verification token";
+            return Utils.OLD_LINK_TOKEN_MSG;
         }
         User user = token.getUser();
         Calendar calendar = Calendar.getInstance();
         if(token.getExpirationTime().getTime() -  calendar.getTime().getTime() <= 0){
             tokenRepository.delete(token);
-            return "Token already expired";
+            return Utils.EXPIRED_TOKEN_MSG;
         }
         UserDTO userDTO = userConverter.convertEntityToDto(user);
         userDTO.setEnabled(true);
-        this.add(userDTO);
-        return "valid";
+        this.updateNotPassword(userDTO);
+        return Utils.SUCCESS_TOKEN_MSG;
     }
 
     public VerificationToken generateNewVerificationCode(String oldToken) {
@@ -192,10 +196,10 @@ public class UserServiceImpl implements UserService {
     public boolean changePassword(ChangePassForm passForm) {
         UserDTO user = getById(passForm.getUserId());
         if (!passwordEncoder.matches(passForm.getCurPass(), user.getPass())) {
-            throw new PasswordMismatchException("Incorrect current password");
+            throw new PasswordMismatchException(Utils.INCORRECT_PASSWORD_MSG);
         }
         if (!passForm.getNewPass().equals(passForm.getReTypeNewPass())) {
-            throw new PasswordMismatchException("New password and confirm password do not match");
+            throw new PasswordMismatchException(Utils.NOT_MATCH_PASSWORD_MSG);
         }
         String newPassHash = passwordEncoder.encode(passForm.getNewPass());
         try {
