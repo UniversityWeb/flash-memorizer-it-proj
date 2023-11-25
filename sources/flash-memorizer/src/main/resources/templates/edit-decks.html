@@ -75,7 +75,7 @@
                                         </a>
 
                                         <a class="btn btn-outline-danger btn-sm delete-button"
-                                           th:href="@{/decks/delete}">
+                                           th:href="@{/decks/delete?deckId={deckId}(deckId=${curDeck.id})}">
                                             <i class="fas fa-trash"></i> Delete
                                         </a>
                                     </div>
