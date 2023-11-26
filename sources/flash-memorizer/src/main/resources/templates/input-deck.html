@@ -11,6 +11,9 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
 
+    <link href="../static/css/back-navbar.css">
+    <link rel="stylesheet" th:href="@{/css/back-navbar.css}">
+
     <link rel="stylesheet" href="../static/richtext/richtext.min.css">
     <link rel="stylesheet" th:href="@{/richtext/richtext.min.css}">
 
@@ -24,7 +27,16 @@
 </head>
 <body>
 
-<div class="container">
+<header>
+    <a class="button_back" th:href="@{/decks/get-my-decks}">
+        <img class="icon_back" alt="Back"
+             th:src="@{/images/chevron-left.svg}"
+             src="../static/images/chevron-left.svg">
+    </a>
+    <h1>Flash Memorizer</h1>
+</header>
+
+<section class="container content_sec">
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="card">
@@ -51,7 +63,7 @@
         </div>
     </div>
 
-</div>
+</section>
 
 <script th:src="@{/richText/jquery.richtext.js}"></script>
 <script src="../static/richText/jquery.richtext.js"></script>
