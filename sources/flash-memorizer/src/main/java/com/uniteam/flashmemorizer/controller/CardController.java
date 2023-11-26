@@ -23,16 +23,6 @@ public class CardController {
 
     @Autowired
     private CardService cardService;
-    @Autowired
-    private DeckService deckService;
-
-    @GetMapping("/{deckId}")
-    public String getByDeckId(@PathVariable Long deckId, Model m) {
-        List<CardDTO> cards = cardService.getByDeckId(deckId);
-        m.addAttribute("cards", cards);
-        m.addAttribute("deckId", deckId);
-        return "review-card";
-    }
 
     @GetMapping("/edit")
     public String getCardsToEdit(@RequestParam Long cardId, Model m) {
