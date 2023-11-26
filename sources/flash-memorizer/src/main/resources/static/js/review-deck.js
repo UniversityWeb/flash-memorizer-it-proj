@@ -63,3 +63,7 @@ function readContentAndStopPropagation(event) {
     event.stopPropagation();
     readContent(event.target.closest('.flip_card_content'));
 }
+
+function editDeck(deckId) {
+    window.location.href = '/decks/edit/' + deckId;
+}

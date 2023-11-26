@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/page-icon.svg}">
     <title>Review Decks</title>
     <meta name="description" content="">
     <link rel="stylesheet" th:href="@{/css/review-deck.css}" href="../static/css/review-deck.css">
@@ -30,7 +31,7 @@
             <h3>Share</h3>
             <ion-icon name="open-outline"></ion-icon>
         </div>
-        <div class="tool_item">
+        <div class="tool_item" th:onclick="'editDeck(' + ${deckForm.deck.id} + ')'">
             <ion-icon name="pencil-outline"></ion-icon>
             <h3>Edit</h3>
         </div>

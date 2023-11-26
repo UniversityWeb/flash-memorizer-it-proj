@@ -3,9 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/page-icon.svg}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+
+    <link href="../static/css/back-navbar.css">
+    <link rel="stylesheet" th:href="@{/css/back-navbar.css}">
+
     <link rel="stylesheet" href="../static/css/edit-deck.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/edit-deck.css}"/>
 
@@ -13,24 +18,32 @@
     <link rel="stylesheet" th:href="@{/richtext/richtext.min.css}">
 
     <link rel="stylesheet" href="../static/richtext/richtext.scss">
-    <link rel="stylesheet" th:href="@{/richText/richtext.scss}">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="stylesheet" th:href="@{/richtext/richtext.scss}">
 
     <title>Edit Deck</title>
 </head>
 <body>
 
-<div th:if="${successMsg}" class="alert alert-success mt-3">
-    <span th:text="${successMsg}">Notify the success message!</span>
-</div>
+<header>
+    <a class="button_back" th:href="@{/decks/review/{deckId}(deckId=${deckForm.deck.id})}">
+        <img class="icon_back" alt="Back"
+             th:src="@{/images/chevron-left.svg}"
+             src="../static/images/chevron-left.svg">
+    </a>
+    <h1>Flash Memorizer</h1>
+</header>
 
-<div th:if="${errorMsg}" class="alert alert-danger mt-3">
-    <span th:text="${errorMsg}">An error occurred.</span>
-</div>
+<section>
+    <div th:if="${successMsg}" class="alert alert-success">
+        <span th:text="${successMsg}">Notify the success message!</span>
+    </div>
 
-<div class="container-fluid">
+    <div th:if="${errorMsg}" class="alert alert-danger">
+        <span th:text="${errorMsg}">An error occurred.</span>
+    </div>
+</section>
+
+<section class="container-fluid content_sec">
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="card">
@@ -124,13 +137,16 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <script th:src="@{/richText/jquery.richtext.js}"></script>
 <script src="../static/richText/jquery.richtext.js"></script>
 
 <script th:src="@{/richText/jquery.richtext.min.js}"></script>
 <script src="../static/richText/jquery.richtext.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 <script>
     $(document).ready(function() {
