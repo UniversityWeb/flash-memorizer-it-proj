@@ -8,7 +8,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
 
-    <link href="../static/css/back-navbar.css">
+    <link rel="stylesheet" href="../static/css/back-navbar.css">
     <link rel="stylesheet" th:href="@{/css/back-navbar.css}">
 
     <link rel="stylesheet" href="../static/css/edit-deck.css">
@@ -26,9 +26,7 @@
 
 <header>
     <a class="button_back" th:href="@{/decks/review/{deckId}(deckId=${deckForm.deck.id})}">
-        <img class="icon_back" alt="Back"
-             th:src="@{/images/chevron-left.svg}"
-             src="../static/images/chevron-left.svg">
+        <ion-icon name="chevron-back-outline"></ion-icon>
     </a>
     <h1>Flash Memorizer</h1>
 </header>
@@ -144,6 +142,9 @@
 
 <script th:src="@{/richText/jquery.richtext.min.js}"></script>
 <script src="../static/richText/jquery.richtext.min.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>

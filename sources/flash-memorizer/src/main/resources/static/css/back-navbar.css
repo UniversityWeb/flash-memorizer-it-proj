@@ -33,13 +33,13 @@ header .button_back{
     margin-right: auto;
 }
 
-.button_back .icon_back{
+.button_back ion-icon{
     width: 30px;
     height: 30px;
     color: #4255FF;
 }
 
-.button_back:hover .icon_back{
+.button_back:hover ion-icon{
     width: 35px;
     height: 35px;
 }
