@@ -221,8 +221,7 @@ section{
     transform: rotateX(180deg);
 }
 
-.flip_card_front .flip_card_text,
-.flip_card_back .flip_card_text{
+.flip_card_text{
     height: auto;
     max-height: 80%;
     overflow: auto;

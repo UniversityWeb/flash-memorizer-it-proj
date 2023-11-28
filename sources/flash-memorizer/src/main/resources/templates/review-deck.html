@@ -42,22 +42,22 @@
                 <div class="flip_cards">
                     <div th:each="card, stat : ${deckForm.cards}" class="flip_card_frame" th:onclick="'toggleFlip(this)'">
                         <div class="flip_card_inner">
-                            <div class="flip_card_front flip_card_content" th:if="${card.term != null}">
+                            <div class="flip_card_front flip_card_content" th:if="${card.term != null and card.term != ''}">
                                 <button class="button_read" th:onclick="'readContentAndStopPropagation(event)'">
                                     <ion-icon name="volume-medium-outline"></ion-icon>
                                 </button>
                                 <p class="flip_card_text" th:inline="text" th:utext="${card.term}"></p>
                             </div>
-                            <div class="flip_card_front flip_card_content" th:if="${card.term == null}">
+                            <div class="flip_card_front flip_card_content" th:if="${card.term == null || card.term == ''}">
                                 <img src="../static/images/empty_img.gif" th:src="@{/images/empty_img.gif}" class="empty">
                             </div>
-                            <div class="flip_card_back flip_card_content" th:if="${card.desc != null}">
+                            <div class="flip_card_back flip_card_content" th:if="${card.desc != null and card.term != ''}">
                                 <button class="button_read" th:onclick="'readContentAndStopPropagation(event)'">
                                     <ion-icon name="volume-medium-outline"></ion-icon>
                                 </button>
                                 <p class="flip_card_text" th:inline="text" th:utext="${card.desc}"></p>
                             </div>
-                            <div class="flip_card_back flip_card_content" th:if="${card.desc == null}">
+                            <div class="flip_card_back flip_card_content" th:if="${card.desc == null || card.term == ''}">
                                 <img src="../static/images/empty_img.gif" th:src="@{/images/empty_img.gif}" class="empty">
                             </div>
                         </div>
