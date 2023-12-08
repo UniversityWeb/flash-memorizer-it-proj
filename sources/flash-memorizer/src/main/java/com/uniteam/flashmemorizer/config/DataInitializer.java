@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,15 +33,17 @@ public class DataInitializer implements CommandLineRunner {
 
     private void initData() {
         List<User> users = initUser();
-        List<Deck> decks = initDeck( users.get(0) );
-        List<Card> cards = initCard( decks.get(0) );
+        List<Deck> savedDecks = initDeck( users.get(0).getUsername() );
+        List<Card> cards = initCard( savedDecks.get(0) );
     }
 
     private List<User> initUser() {
+        final String DEFAULT_HASHED_PASS = encoder.encode("123456");
+
         List<User> users = List.of(
                 User.builder()
                         .username("username1")
-                        .pass( encoder.encode("pass2") )
+                        .pass(DEFAULT_HASHED_PASS)
                         .email("user1@gmail.com")
                         .fullName("User One")
                         .registration(new Date(2023, 1, 1, 12, 12, 12))
@@ -50,7 +53,7 @@ public class DataInitializer implements CommandLineRunner {
                         .build(),
                 User.builder()
                         .username("username2")
-                        .pass( encoder.encode("pass2") )
+                        .pass(DEFAULT_HASHED_PASS)
                         .email("user2@gamil.com")
                         .fullName("User Two")
                         .registration(new Date(2023, 4, 4, 5, 5, 5))
@@ -59,10 +62,17 @@ public class DataInitializer implements CommandLineRunner {
                         .isEnabled(true)
                         .build()
         );
-        return userRepo.saveAll(users);
+        try {
+            userRepo.saveAll(users);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 
-    private List<Deck> initDeck(User user) {
+    private List<Deck> initDeck(String username) {
+        User user = userRepo.findByUsername(username);
+
         List<Deck> decks = List.of(
                 Deck.builder()
                         .name("Deck 1")
