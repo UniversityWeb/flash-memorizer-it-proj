@@ -1,6 +1,6 @@
 package com.uniteam.flashmemorizer.service.impl;
 
-import com.uniteam.flashmemorizer.converter.UserConverter;
+import com.uniteam.flashmemorizer.mapper.UserMapper;
 import com.uniteam.flashmemorizer.dto.UserDTO;
 import com.uniteam.flashmemorizer.dto.UserHolder;
 import com.uniteam.flashmemorizer.entity.User;
@@ -15,8 +15,8 @@ import com.uniteam.flashmemorizer.repository.VerificationTokenRepository;
 import com.uniteam.flashmemorizer.service.UserService;
 import com.uniteam.flashmemorizer.utility.Utils;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,20 +28,20 @@ import java.util.*;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final Logger log = LogManager.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepo;
     private final VerificationTokenRepository verificationTokenRepo;
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository tokenRepository;;
-    private final UserConverter userConverter;
+    private final UserMapper userMapper;
 
     @Override
     public UserDTO add(UserDTO userDTO) {
-        User user = userConverter.convertDtoToEntity(userDTO);
+        User user = userMapper.convertDtoToEntity(userDTO);
         try {
             User added = userRepo.save(user);
-            return userConverter.convertEntityToDto(added);
+            return userMapper.convertEntityToDto(added);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
         try {
             User updated = userRepo.save(user);
-            return userConverter.convertEntityToDto(updated);
+            return userMapper.convertEntityToDto(updated);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -72,13 +72,13 @@ public class UserServiceImpl implements UserService {
     public UserDTO getById(Long id) throws UserNotFoundException {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Could not find any users with userId=" + id));
-        return userConverter.convertEntityToDto(user);
+        return userMapper.convertEntityToDto(user);
     }
 
     @Override
     public List<UserDTO> getUsers() {
         List<User> users = userRepo.findAll();
-        return userConverter.convertEntityToDto(users);
+        return userMapper.convertEntityToDto(users);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUserVerifycationToken(UserDTO theUser, String token) {
-        User user = userConverter.convertDtoToEntity(theUser);
+        User user = userMapper.convertDtoToEntity(theUser);
         var verificationToken = new VerificationToken(token, user);
         tokenRepository.save(verificationToken);
     }
@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService {
             tokenRepository.delete(token);
             return Utils.EXPIRED_TOKEN_MSG;
         }
-        UserDTO userDTO = userConverter.convertEntityToDto(user);
+        UserDTO userDTO = userMapper.convertEntityToDto(user);
         userDTO.setEnabled(true);
         this.updateNotPassword(userDTO);
         return Utils.SUCCESS_TOKEN_MSG;

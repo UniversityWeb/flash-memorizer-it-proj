@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import com.uniteam.flashmemorizer.config.AppConfig;
 import com.uniteam.flashmemorizer.dto.UserDTO;
@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AppConfig.class)
-@ContextConfiguration(classes = VerificationTokenConverter.class)
-class VerificationTokenConverterTest {
+@ContextConfiguration(classes = VerificationTokenMapper.class)
+class VerificationTokenMapperTest {
 
     @Autowired
-    private VerificationTokenConverter tokenConverter;
+    private VerificationTokenMapper tokenMapper;
 
     @Test
     public void testConvertEntityToDto() {
@@ -33,7 +33,7 @@ class VerificationTokenConverterTest {
                 .build();
 
         // Act
-        VerificationTokenDTO tokenDTO = tokenConverter.convertEntityToDto(token);
+        VerificationTokenDTO tokenDTO = tokenMapper.convertEntityToDto(token);
 
         // Assert
         assertEquals(tokenDTO.getId(), token.getId());
@@ -48,7 +48,7 @@ class VerificationTokenConverterTest {
         VerificationToken token = null;
 
         // Act
-        VerificationTokenDTO tokenDTO = tokenConverter.convertEntityToDto(token);
+        VerificationTokenDTO tokenDTO = tokenMapper.convertEntityToDto(token);
 
         // Assert
         assertNull(tokenDTO);
@@ -65,7 +65,7 @@ class VerificationTokenConverterTest {
                 .build();
 
         // Act
-        VerificationToken token = tokenConverter.convertDtoToEntity(tokenDTO);
+        VerificationToken token = tokenMapper.convertDtoToEntity(tokenDTO);
 
         // Assert
         assertEquals(tokenDTO.getId(), token.getId());
@@ -80,7 +80,7 @@ class VerificationTokenConverterTest {
         VerificationTokenDTO tokenDTO = null;
 
         // Act
-        VerificationToken token = tokenConverter.convertDtoToEntity(tokenDTO);
+        VerificationToken token = tokenMapper.convertDtoToEntity(tokenDTO);
 
         // Assert
         assertNull(token);

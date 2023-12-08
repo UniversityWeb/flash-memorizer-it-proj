@@ -21,9 +21,9 @@
             <h3>Test</h3>
             <ion-icon name="chevron-down-outline"></ion-icon>
             <div class="dropdown_menu">
-                <a class="dropdown-item" href="#">Multi Choice</a>
-                <a class="dropdown-item" href="#">Fill Blank</a>
-                <a class="dropdown-item" href="#">Match</a>
+                <a class="dropdown-item" th:href="@{/review/get-review(reviewType=MULTI_CHOICE,deckId=${deckForm.deck.id})}">Multi Choice</a>
+                <a class="dropdown-item" th:href="@{/review/get-review(reviewType=FILL_BLANK,deckId=${deckForm.deck.id})}">Fill Blank</a>
+                <a class="dropdown-item" th:href="@{/review/get-review(reviewType=MATCHING,deckId=${deckForm.deck.id})}">Match</a>
             </div>
         </div>
         <div class="tool_item" th:onclick="'editDeck(' + ${deckForm.deck.id} + ')'">

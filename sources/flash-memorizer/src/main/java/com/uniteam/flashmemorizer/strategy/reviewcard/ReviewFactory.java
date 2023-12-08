@@ -1,7 +1,7 @@
 package com.uniteam.flashmemorizer.strategy.reviewcard;
 
 import com.uniteam.flashmemorizer.customenum.EReview;
-import com.uniteam.flashmemorizer.exception.ReviewTypeNotFoundException;
+import com.uniteam.flashmemorizer.exception.ReviewTypeNotSupportedException;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ public class ReviewFactory {
 
     public ReviewStrategy create(EReview review) {
         if (!reviewStrategies.containsKey(review)) {
-            throw new ReviewTypeNotFoundException("Cannot find review type: " + review);
+            throw new ReviewTypeNotSupportedException("Cannot find review type: " + review);
         }
         return reviewStrategies.get(review);
     }

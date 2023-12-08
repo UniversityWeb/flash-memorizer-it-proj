@@ -1,13 +1,13 @@
 package com.uniteam.flashmemorizer.service.impl;
 
-import com.uniteam.flashmemorizer.converter.DeckConverter;
+import com.uniteam.flashmemorizer.mapper.DeckMapper;
 import com.uniteam.flashmemorizer.dto.DeckDTO;
 import com.uniteam.flashmemorizer.entity.Deck;
 import com.uniteam.flashmemorizer.exception.DeckNotFoundException;
 import com.uniteam.flashmemorizer.repository.DeckRepository;
 import com.uniteam.flashmemorizer.service.DeckService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,22 +16,22 @@ import java.util.List;
 @Service
 public class DeckServiceImpl implements DeckService {
 
-    private final Logger log = LoggerFactory.getLogger(DeckServiceImpl.class);
+    private final Logger log = LogManager.getLogger(DeckServiceImpl.class);
 
     @Autowired
     private DeckRepository deckRepo;
 
     @Autowired
-    private DeckConverter deckConverter;
+    private DeckMapper deckMapper;
 
     @Override
     public DeckDTO add(DeckDTO deckDTO) {
-        Deck deck = deckConverter.convertDtoToEntity(deckDTO);
+        Deck deck = deckMapper.convertDtoToEntity(deckDTO);
         try {
              Deck added = deckRepo.save(deck);
-             return deckConverter.convertEntityToDto(added);
+             return deckMapper.convertEntityToDto(added);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -62,7 +62,7 @@ public class DeckServiceImpl implements DeckService {
 
         try {
             Deck updated = deckRepo.save(deck);
-            return deckConverter.convertEntityToDto(updated);
+            return deckMapper.convertEntityToDto(updated);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -74,7 +74,7 @@ public class DeckServiceImpl implements DeckService {
         List<Deck> decks = deckRepo.findByUserId(userId);
         if (decks == null || decks.isEmpty())
             throw new DeckNotFoundException("Could not find any decks with userId=" + userId);
-        return deckConverter.convertEntityToDto(decks);
+        return deckMapper.convertEntityToDto(decks);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class DeckServiceImpl implements DeckService {
         Deck deck = deckRepo
                 .findById(id)
                 .orElseThrow(() -> new DeckNotFoundException("Could not find any decks with Id=" + id));
-        return deckConverter.convertEntityToDto(deck);
+        return deckMapper.convertEntityToDto(deck);
     }
 
     @Override
@@ -90,6 +90,6 @@ public class DeckServiceImpl implements DeckService {
         List<Deck> decks = deckRepo.findByUsername(username);
         if (decks == null || decks.isEmpty())
             throw new DeckNotFoundException("Could not find any decks with username=" + username);
-        return deckConverter.convertEntityToDto(decks);
+        return deckMapper.convertEntityToDto(decks);
     }
 }

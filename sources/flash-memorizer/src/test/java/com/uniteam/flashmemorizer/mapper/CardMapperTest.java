@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import com.uniteam.flashmemorizer.config.AppConfig;
 import com.uniteam.flashmemorizer.dto.CardDTO;
@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AppConfig.class)
-@ContextConfiguration(classes = CardConverter.class)
-class CardConverterTest {
+@ContextConfiguration(classes = CardMapper.class)
+class CardMapperTest {
     @Autowired
-    private CardConverter cardConverter;
+    private CardMapper cardMapper;
 
     @Test
     public void testConvertEntityToDto() {
@@ -28,7 +28,7 @@ class CardConverterTest {
                 .build();
 
         // Act
-        CardDTO cardDTO = cardConverter.convertEntityToDto(card);
+        CardDTO cardDTO = cardMapper.convertEntityToDto(card);
 
         // Assert
         assertEquals(cardDTO.getId(), card.getId());
@@ -43,7 +43,7 @@ class CardConverterTest {
         Card card = null;
 
         // Act
-        CardDTO cardDTO = cardConverter.convertEntityToDto(card);
+        CardDTO cardDTO = cardMapper.convertEntityToDto(card);
 
         // Assert
         assertNull(cardDTO);
@@ -60,7 +60,7 @@ class CardConverterTest {
                 .build();
 
         // Act
-        Card card = cardConverter.convertDtoToEntity(cardDTO);
+        Card card = cardMapper.convertDtoToEntity(cardDTO);
 
         // Assert
         assertEquals(cardDTO.getId(), card.getId());
@@ -75,7 +75,7 @@ class CardConverterTest {
         CardDTO cardDTO = null;
 
         // Act
-        Card card = cardConverter.convertDtoToEntity(cardDTO);
+        Card card = cardMapper.convertDtoToEntity(cardDTO);
 
         // Assert
         assertNull(card);

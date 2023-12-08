@@ -27,9 +27,9 @@ import java.util.logging.Logger;
 @RequiredArgsConstructor
 @RequestMapping("/register-process")
 public class RegistrationController {
+
     private final UserService userService;
     private final ApplicationEventPublisher publisher;
-    private final VerificationTokenRepository tokenRepository;
     private final RegistrationCompleteEventListener eventListener;
 
     @PostMapping

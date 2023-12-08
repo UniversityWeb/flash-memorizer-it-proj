@@ -16,13 +16,6 @@ public class Utils {
     public static String INCORRECT_PASSWORD_MSG = "Incorrect current password";
     public static String NOT_MATCH_PASSWORD_MSG = "New password and confirm password do not match";
 
-
-    public static <T> List<T> getElementsInAWithoutB(List<T> a, List<T> b) {
-        List<T> result = new ArrayList<>(a);
-        result.removeAll(b);
-        return result;
-    }
-
     public static String htmlToPlainText(String html) {
         Document document = Jsoup.parse(html);
         document.outputSettings(new Document.OutputSettings().prettyPrint(false));

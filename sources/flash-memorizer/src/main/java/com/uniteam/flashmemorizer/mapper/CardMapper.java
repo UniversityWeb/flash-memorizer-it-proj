@@ -1,11 +1,11 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.entity.Card;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CardConverter extends BaseConverter<Card, CardDTO> {
+public class CardMapper extends BaseMapper<Card, CardDTO> {
 
     @Override
     protected Class<CardDTO> getDtoClass() {

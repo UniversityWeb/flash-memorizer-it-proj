@@ -1,7 +1,8 @@
 package com.uniteam.flashmemorizer.controller;
 
-import com.uniteam.flashmemorizer.dto.*;
 import com.uniteam.flashmemorizer.customenum.EReview;
+import com.uniteam.flashmemorizer.dto.CardDTO;
+import com.uniteam.flashmemorizer.dto.DeckDTO;
 import com.uniteam.flashmemorizer.exception.DeckNotFoundException;
 import com.uniteam.flashmemorizer.form.CardReviewForm;
 import com.uniteam.flashmemorizer.form.FillBlankForm;
@@ -9,8 +10,6 @@ import com.uniteam.flashmemorizer.form.MultiChoiceForm;
 import com.uniteam.flashmemorizer.service.CardReviewService;
 import com.uniteam.flashmemorizer.service.CardService;
 import com.uniteam.flashmemorizer.service.DeckService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +20,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/review")
 public class ReviewController {
-    private final Logger log = LoggerFactory.getLogger(ReviewController.class);
 
     @Autowired
     private CardService cardService;

@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import com.uniteam.flashmemorizer.dto.DeckDTO;
 import com.uniteam.flashmemorizer.entity.Deck;
@@ -6,7 +6,7 @@ import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeckConverter extends BaseConverter<Deck, DeckDTO> {
+public class DeckMapper extends BaseMapper<Deck, DeckDTO> {
     @Override
     protected Class<DeckDTO> getDtoClass() {
         return DeckDTO.class;
