@@ -61,8 +61,8 @@ public class SecurityConfig {
         return http.cors(withDefaults())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/css/**", "/js/**", "/images/**").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/home").permitAll())
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/login-process").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/logout").permitAll())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/login-process").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/register-process").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/register-process/verifyEmail").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/user/edit/{id}").hasAnyRole("USERS", "ADMIN"))
@@ -79,6 +79,7 @@ public class SecurityConfig {
                         .failureUrl("/home?loginFailed")
                         .permitAll())
                 .logout(out -> out
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/home")
                         .logoutSuccessHandler(logoutSuccessHandler())
                         .invalidateHttpSession(true)

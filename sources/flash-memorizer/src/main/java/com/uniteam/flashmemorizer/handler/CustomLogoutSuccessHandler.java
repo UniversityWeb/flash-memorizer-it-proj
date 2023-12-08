@@ -35,7 +35,6 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler
     }
 
     private void clearAuthenticationData(){
-        Authentication authentication = new UsernamePasswordAuthenticationToken(null, null);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.clearContext();
     }
 }
