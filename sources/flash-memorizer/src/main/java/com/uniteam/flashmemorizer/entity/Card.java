@@ -30,7 +30,4 @@ public class Card implements Serializable {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Deck deck;
-
-    @OneToMany(mappedBy = "card", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<UserCard> userCards;
 }
