@@ -1,17 +1,4 @@
-*{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body{
-    width: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     background-color: rgb(233, 233, 233);
 }
 
@@ -28,9 +15,10 @@ header{
 }
 
 header .logo{
-    flex: 21;
+    flex: 15;
     color: #007BFF;
 }
+
 
 header .control{
     flex: 1;
@@ -43,14 +31,19 @@ header .control{
 .control .avartar_user-frame{
     width: 50px;
     height: 50px;
+    font-size: 50px;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #c1dfff;
-    transition: border .5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border .5s ease-in-out, background-color .5s ease-in-out;
 }
 
 .control .avartar_user-frame:hover{
     border: 3px solid #007BFF;
+    background-color: #c1dfff;
 }
 
 .control .control-menu:hover,
@@ -58,9 +51,15 @@ header .control{
     display: flex;
 }
 
-.avartar_user-frame .avartar_user-image{
-    width: 100%;
-    height: auto;
+.avartar_user-frame ion-icon{
+    width: 30px;
+    height: 30px;
+    color: #007BFF;
+    transition: color .5s ease-in-out;
+}
+
+.control .avartar_user-frame:hover ~ .avartar_user-frame ion-icon{
+    color: #FFFFFF;
 }
 
 .control-menu{
@@ -68,11 +67,11 @@ header .control{
     width: 150px;
     height: auto;
     background-color: #007BFF;
-    transform: translateY(51px);
+    transform: translateY(50px);
     display: flex;
     flex-direction: column;
     color: #fff;
-    z-index: 1;
+    z-index: 99;
     display: none;
 }
 
@@ -92,165 +91,7 @@ header .control{
     background-color: #0069d9;
 }
 
-
 section{
-    margin-top: 20px;
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 50px;
-    background-color: #fff;
-}
-
-.avatar{
     width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-#avartar_user-frame {
-    width: 170px;
-    height: 170px;
-    overflow: hidden;
-    margin-top: 20px;
-    border: 2px solid #cdcfd6;
-    border-radius: 50%;
-    text-align: center;
-}
-
-section #avartar_user-frame:hover{
-    box-shadow: 0px 0px 5px 7px #c5e1ff;
-}
-
-#avartar_user-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.avatar_control{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    width: 87px;
-    transform: translateX(120px) translateY(80px);
-    display: none;
-}
-
-.avatar_control-item{
-    border: none;
-    background: none;
-}
-
-.full_name{
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    color: #007BFF;
-}
-
-.information-line{
-    height: 70px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 5px;
-}
-
-.information-line input{
-    width: 100%;
-    height: 40px;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid #cdcfd6;
-    margin-top: 5px;
-    text-indent: 10px;
-    pointer-events: none;
-    background-color: #f3f3f3;
-}
-
-.information-line input:focus{
-    box-shadow: 0px 0px 1px 3px #c1dfff;
-}
-
-.button-change-password{
-    margin-top: 20px;
-    height: 40px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    border-radius: 5px;
-    border: 1px solid #cdcfd6;
-    transition: background-color .5s ease-in-out;
-}
-
-.button-change-password:hover{
-    background-color: #f1f1f1;
-}
-
-.button-change-password p{
-    flex: 12;
-}
-
-.button-change-password ion-icon{
     flex: 1;
-}
-
-.information_control{
-    margin: 20px 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.information_control-item{
-    width: 170px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin: 0px 30px;
-    text-decoration: none;
-    color: #2f2f2f;
-    transition: background-color .5s ease-in-out;
-}
-
-.information_control-item p{
-    flex: 5;
-}
-
-.information_control-item ion-icon{
-    flex: 1;
-}
-
-
-.information_control-item p,
-.information_control-item ion-icon{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.edit-button{
-    font-size: 0.9em;
-    border: 1px solid #007BFF;
-}
-
-.delete-button{
-    font-size: 0.9em;
-    border: 1px solid #ff0000;
-}
-
-.edit-button:hover{
-    background-color: #007BFF;
-}
-
-.delete-button:hover{
-    background-color: #ff0000;
 }

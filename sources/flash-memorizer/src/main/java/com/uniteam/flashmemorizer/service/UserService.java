@@ -24,6 +24,5 @@ public interface UserService {
     UserDTO getById(Long id);
     boolean delete(Long userId);
     boolean changePassword(ChangePassForm passForm);
-
     void deleteUnverifiedUsers();
 }

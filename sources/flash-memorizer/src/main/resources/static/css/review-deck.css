@@ -210,7 +210,7 @@ section{
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    justify-content: first baseline;
+    justify-content: center;
     text-align: center;
     border-radius: 15px;
     padding: 30px;
@@ -221,30 +221,28 @@ section{
     transform: rotateX(180deg);
 }
 
-.flip_card_front .flip_card_text,
-.flip_card_back .flip_card_text{
-    height: 80%;
+.flip_card_text{
+    height: auto;
+    max-height: 80%;
     overflow: auto;
-    word-wrap: break-word;
     font-size: 1.5em;
     text-align: center;
-    vertical-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 .flip_card_front .button_read,
 .flip_card_back .button_read{
+    position: absolute;
     background: #fff;
     border: none;
     width: 44px;
-    height: 10%;
+    height: 44px;
     font-size: 30px;
+    transform: translateY(-210px) translateX(710px);
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-left: auto;
+    align-items: center;
 }
 
 .button_read:hover{
