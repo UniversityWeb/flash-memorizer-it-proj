@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AppConfig.class)
 @ContextConfiguration(classes = VerificationTokenMapper.class)
-class VerificationTokenConverterTest {
+class VerificationTokenMapperTest {
 
     @Autowired
-    private VerificationTokenMapper tokenConverter;
+    private VerificationTokenMapper tokenMapper;
 
     @Test
     public void testConvertEntityToDto() {
@@ -33,7 +33,7 @@ class VerificationTokenConverterTest {
                 .build();
 
         // Act
-        VerificationTokenDTO tokenDTO = tokenConverter.convertEntityToDto(token);
+        VerificationTokenDTO tokenDTO = tokenMapper.convertEntityToDto(token);
 
         // Assert
         assertEquals(tokenDTO.getId(), token.getId());
@@ -48,7 +48,7 @@ class VerificationTokenConverterTest {
         VerificationToken token = null;
 
         // Act
-        VerificationTokenDTO tokenDTO = tokenConverter.convertEntityToDto(token);
+        VerificationTokenDTO tokenDTO = tokenMapper.convertEntityToDto(token);
 
         // Assert
         assertNull(tokenDTO);
@@ -65,7 +65,7 @@ class VerificationTokenConverterTest {
                 .build();
 
         // Act
-        VerificationToken token = tokenConverter.convertDtoToEntity(tokenDTO);
+        VerificationToken token = tokenMapper.convertDtoToEntity(tokenDTO);
 
         // Assert
         assertEquals(tokenDTO.getId(), token.getId());
@@ -80,7 +80,7 @@ class VerificationTokenConverterTest {
         VerificationTokenDTO tokenDTO = null;
 
         // Act
-        VerificationToken token = tokenConverter.convertDtoToEntity(tokenDTO);
+        VerificationToken token = tokenMapper.convertDtoToEntity(tokenDTO);
 
         // Assert
         assertNull(token);

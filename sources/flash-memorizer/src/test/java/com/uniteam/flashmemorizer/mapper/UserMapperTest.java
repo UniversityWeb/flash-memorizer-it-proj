@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AppConfig.class)
 @ContextConfiguration(classes = UserMapper.class)
-class UserConverterTest {
+class UserMapperTest {
     @Autowired
-    private UserMapper userConverter;
+    private UserMapper userMapper;
 
     @Test
     public void testConvertEntityToDto() {
@@ -33,7 +33,7 @@ class UserConverterTest {
                 .build();
 
         // Act
-        UserDTO userDTO = userConverter.convertEntityToDto(user);
+        UserDTO userDTO = userMapper.convertEntityToDto(user);
 
         // Assert
         assertEquals(userDTO.getId(), user.getId());
@@ -51,7 +51,7 @@ class UserConverterTest {
         User user = null;
 
         // Act
-        UserDTO userDTO = userConverter.convertEntityToDto(user);
+        UserDTO userDTO = userMapper.convertEntityToDto(user);
 
         // Assert
         assertNull(userDTO);
@@ -71,7 +71,7 @@ class UserConverterTest {
                 .build();
 
         // Act
-        User user = userConverter.convertDtoToEntity(userDTO);
+        User user = userMapper.convertDtoToEntity(userDTO);
 
         // Assert
         assertEquals(userDTO.getId(), user.getId());
@@ -89,7 +89,7 @@ class UserConverterTest {
         UserDTO userDTO = null;
 
         // Act
-        User user = userConverter.convertDtoToEntity(userDTO);
+        User user = userMapper.convertDtoToEntity(userDTO);
 
         // Assert
         assertNull(user);

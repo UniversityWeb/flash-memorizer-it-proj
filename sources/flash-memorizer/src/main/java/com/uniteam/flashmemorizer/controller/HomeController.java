@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping("/home")
     public String get() {
-//        throw new RuntimeException();
         return "home";
     }
 }

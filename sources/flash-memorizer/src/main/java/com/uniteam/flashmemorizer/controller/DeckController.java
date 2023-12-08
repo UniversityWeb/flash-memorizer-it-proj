@@ -3,17 +3,14 @@ package com.uniteam.flashmemorizer.controller;
 import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.dto.DeckDTO;
 import com.uniteam.flashmemorizer.dto.UserDTO;
-import com.uniteam.flashmemorizer.entity.Deck;
 import com.uniteam.flashmemorizer.exception.DeckNotFoundException;
 import com.uniteam.flashmemorizer.form.DeckForm;
 import com.uniteam.flashmemorizer.service.CardService;
 import com.uniteam.flashmemorizer.service.DeckService;
 import com.uniteam.flashmemorizer.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +24,7 @@ import java.util.List;
 @RequestMapping("/decks")
 public class DeckController {
 
-    private final Logger log = LoggerFactory.getLogger(DeckController.class);
+    private final Logger log = LogManager.getLogger(DeckController.class);
 
     @Autowired
     private DeckService deckService;

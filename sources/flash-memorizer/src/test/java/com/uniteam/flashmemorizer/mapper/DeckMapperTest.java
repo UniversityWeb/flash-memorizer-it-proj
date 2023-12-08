@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AppConfig.class)
 @ContextConfiguration(classes = DeckMapper.class)
-class DeckConverterTest {
+class DeckMapperTest {
     @Autowired
-    private DeckMapper deckConverter;
+    private DeckMapper deckMapper;
 
     @Test
     public void testConvertEntityToDto() {
@@ -32,7 +32,7 @@ class DeckConverterTest {
                 .build();
 
         // Act
-        DeckDTO deckDTO = deckConverter.convertEntityToDto(deck);
+        DeckDTO deckDTO = deckMapper.convertEntityToDto(deck);
 
         // Assert
         assertEquals(deckDTO.getId(), deck.getId());
@@ -49,7 +49,7 @@ class DeckConverterTest {
         Deck deck = null;
 
         // Act
-        DeckDTO deckDTO = deckConverter.convertEntityToDto(deck);
+        DeckDTO deckDTO = deckMapper.convertEntityToDto(deck);
 
         // Assert
         assertNull(deckDTO);
@@ -68,7 +68,7 @@ class DeckConverterTest {
                 .build();
 
         // Act
-        Deck deck = deckConverter.convertDtoToEntity(deckDTO);
+        Deck deck = deckMapper.convertDtoToEntity(deckDTO);
 
         // Assert
         assertEquals(deck.getId(), deckDTO.getId());
@@ -85,7 +85,7 @@ class DeckConverterTest {
         DeckDTO deckDTO = null;
 
         // Act
-        Deck deck = deckConverter.convertDtoToEntity(deckDTO);
+        Deck deck = deckMapper.convertDtoToEntity(deckDTO);
 
         // Assert
         assertNull(deck);

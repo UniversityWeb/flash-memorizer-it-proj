@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AppConfig.class)
 @ContextConfiguration(classes = CardMapper.class)
-class CardConverterTest {
+class CardMapperTest {
     @Autowired
-    private CardMapper cardConverter;
+    private CardMapper cardMapper;
 
     @Test
     public void testConvertEntityToDto() {
@@ -28,7 +28,7 @@ class CardConverterTest {
                 .build();
 
         // Act
-        CardDTO cardDTO = cardConverter.convertEntityToDto(card);
+        CardDTO cardDTO = cardMapper.convertEntityToDto(card);
 
         // Assert
         assertEquals(cardDTO.getId(), card.getId());
@@ -43,7 +43,7 @@ class CardConverterTest {
         Card card = null;
 
         // Act
-        CardDTO cardDTO = cardConverter.convertEntityToDto(card);
+        CardDTO cardDTO = cardMapper.convertEntityToDto(card);
 
         // Assert
         assertNull(cardDTO);
@@ -60,7 +60,7 @@ class CardConverterTest {
                 .build();
 
         // Act
-        Card card = cardConverter.convertDtoToEntity(cardDTO);
+        Card card = cardMapper.convertDtoToEntity(cardDTO);
 
         // Assert
         assertEquals(cardDTO.getId(), card.getId());
@@ -75,7 +75,7 @@ class CardConverterTest {
         CardDTO cardDTO = null;
 
         // Act
-        Card card = cardConverter.convertDtoToEntity(cardDTO);
+        Card card = cardMapper.convertDtoToEntity(cardDTO);
 
         // Assert
         assertNull(card);

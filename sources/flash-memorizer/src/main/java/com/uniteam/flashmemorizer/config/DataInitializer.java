@@ -1,8 +1,15 @@
 package com.uniteam.flashmemorizer.config;
 
-import com.uniteam.flashmemorizer.entity.*;
-import com.uniteam.flashmemorizer.repository.*;
+import com.uniteam.flashmemorizer.controller.CardController;
+import com.uniteam.flashmemorizer.entity.Card;
+import com.uniteam.flashmemorizer.entity.Deck;
+import com.uniteam.flashmemorizer.entity.User;
+import com.uniteam.flashmemorizer.repository.CardRepository;
+import com.uniteam.flashmemorizer.repository.DeckRepository;
+import com.uniteam.flashmemorizer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -14,6 +21,8 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
+
+    private final Logger log = LogManager.getLogger(CardController.class);
 
     private final CardRepository cardRepo;
     private final DeckRepository deckRepo;
@@ -65,7 +74,7 @@ public class DataInitializer implements CommandLineRunner {
         try {
             userRepo.saveAll(users);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return users;
     }
@@ -89,7 +98,13 @@ public class DataInitializer implements CommandLineRunner {
                         .user(user)
                         .build()
         );
-        return deckRepo.saveAll(decks);
+        List<Deck> savedDecks = new ArrayList<>();
+        try {
+            savedDecks = deckRepo.saveAll(decks);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return savedDecks;
     }
 
     private List<Card> initCard(Deck deck) {
@@ -125,6 +140,12 @@ public class DataInitializer implements CommandLineRunner {
                         .deck(deck)
                         .build()
         );
-        return cardRepo.saveAll(cards);
+        List<Card> savedCards = new ArrayList<>();
+        try {
+            savedCards = cardRepo.saveAll(cards);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return savedCards;
     }
 }
