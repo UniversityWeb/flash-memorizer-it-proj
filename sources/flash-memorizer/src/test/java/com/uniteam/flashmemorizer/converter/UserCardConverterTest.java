@@ -2,8 +2,6 @@ package com.uniteam.flashmemorizer.converter;
 
 import com.uniteam.flashmemorizer.config.AppConfig;
 import com.uniteam.flashmemorizer.dto.UserCardDTO;
-import com.uniteam.flashmemorizer.entity.UserCard;
-import com.uniteam.flashmemorizer.customenum.ERating;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,6 @@
 package com.uniteam.flashmemorizer.config;
 
 import com.uniteam.flashmemorizer.entity.*;
-import com.uniteam.flashmemorizer.customenum.ERating;
 import com.uniteam.flashmemorizer.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -18,8 +17,6 @@ public class DataInitializer implements CommandLineRunner {
     private final CardRepository cardRepo;
     private final DeckRepository deckRepo;
     private final UserRepository userRepo;
-    private final UserCardRepository userCardRepo;
-    private final SharedDeckRepository sharedDeckRepo;
     private final PasswordEncoder encoder;
 
     @Override
@@ -29,19 +26,14 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void clearAllData() {
-        sharedDeckRepo.deleteAll();
-        userCardRepo.deleteAll();
         cardRepo.deleteAll();
         deckRepo.deleteAll();
-        userRepo.deleteAll();
     }
 
     private void initData() {
         List<User> users = initUser();
         List<Deck> decks = initDeck( users.get(0) );
         List<Card> cards = initCard( decks.get(0) );
-        initUserCard( cards.get(0), users.get(0) );
-        initSharedDeck( users.get(1), decks.get(0) );
     }
 
     private List<User> initUser() {
@@ -124,34 +116,5 @@ public class DataInitializer implements CommandLineRunner {
                         .build()
         );
         return cardRepo.saveAll(cards);
-    }
-
-    private List<UserCard> initUserCard(Card card, User user) {
-        List<UserCard> userCards = List.of(
-                UserCard.builder()
-                        .cardId(card.getId())
-                        .userId(user.getId())
-                        .lastReview(new Date(2023, 1, 1, 12, 1, 2))
-                        .reviewCount(4L)
-                        .interval(12L)
-                        .rating(ERating.HIGH)
-                        .card(card)
-                        .user(user)
-                        .build()
-        );
-        return userCardRepo.saveAll(userCards);
-    }
-
-    private List<SharedDeck> initSharedDeck(User recipient, Deck deck) {
-        List<SharedDeck> sharedDecks = List.of(
-                SharedDeck.builder()
-                        .recipientId(recipient.getId())
-                        .deckId(deck.getId())
-                        .recipient(recipient)
-                        .deck(deck)
-                        .creation(new Date(2023, 10, 10, 1, 3, 4))
-                        .build()
-        );
-        return sharedDeckRepo.saveAll(sharedDecks);
     }
 }

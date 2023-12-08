@@ -40,7 +40,4 @@ public class Deck implements Serializable {
 
     @OneToMany(mappedBy = "deck", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Card> cards;
-
-    @OneToMany(mappedBy = "deck", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<SharedDeck> sharedDecks;
 }

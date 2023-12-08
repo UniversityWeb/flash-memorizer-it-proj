@@ -2,7 +2,6 @@ package com.uniteam.flashmemorizer.converter;
 
 import com.uniteam.flashmemorizer.config.AppConfig;
 import com.uniteam.flashmemorizer.dto.SharedDeckDTO;
-import com.uniteam.flashmemorizer.entity.SharedDeck;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
