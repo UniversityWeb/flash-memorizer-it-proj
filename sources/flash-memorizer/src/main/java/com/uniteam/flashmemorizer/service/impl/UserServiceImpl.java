@@ -1,6 +1,6 @@
 package com.uniteam.flashmemorizer.service.impl;
 
-import com.uniteam.flashmemorizer.converter.UserConverter;
+import com.uniteam.flashmemorizer.mapper.UserMapper;
 import com.uniteam.flashmemorizer.dto.UserDTO;
 import com.uniteam.flashmemorizer.dto.UserHolder;
 import com.uniteam.flashmemorizer.entity.User;
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     private final VerificationTokenRepository verificationTokenRepo;
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository tokenRepository;;
-    private final UserConverter userConverter;
+    private final UserMapper userConverter;
 
     @Override
     public UserDTO add(UserDTO userDTO) {

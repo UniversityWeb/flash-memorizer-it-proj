@@ -1,11 +1,11 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import com.uniteam.flashmemorizer.dto.VerificationTokenDTO;
 import com.uniteam.flashmemorizer.entity.VerificationToken;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VerificationTokenConverter extends BaseConverter<VerificationToken, VerificationTokenDTO> {
+public class VerificationTokenMapper extends BaseMapper<VerificationToken, VerificationTokenDTO> {
     @Override
     protected Class<VerificationTokenDTO> getDtoClass() {
         return VerificationTokenDTO.class;

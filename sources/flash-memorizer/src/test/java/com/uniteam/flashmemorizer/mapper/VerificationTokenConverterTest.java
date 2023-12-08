@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import com.uniteam.flashmemorizer.config.AppConfig;
 import com.uniteam.flashmemorizer.dto.UserDTO;
@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AppConfig.class)
-@ContextConfiguration(classes = VerificationTokenConverter.class)
+@ContextConfiguration(classes = VerificationTokenMapper.class)
 class VerificationTokenConverterTest {
 
     @Autowired
-    private VerificationTokenConverter tokenConverter;
+    private VerificationTokenMapper tokenConverter;
 
     @Test
     public void testConvertEntityToDto() {

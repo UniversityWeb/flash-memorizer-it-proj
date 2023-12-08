@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import com.uniteam.flashmemorizer.config.AppConfig;
 import com.uniteam.flashmemorizer.dto.DeckDTO;
@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AppConfig.class)
-@ContextConfiguration(classes = DeckConverter.class)
+@ContextConfiguration(classes = DeckMapper.class)
 class DeckConverterTest {
     @Autowired
-    private DeckConverter deckConverter;
+    private DeckMapper deckConverter;
 
     @Test
     public void testConvertEntityToDto() {

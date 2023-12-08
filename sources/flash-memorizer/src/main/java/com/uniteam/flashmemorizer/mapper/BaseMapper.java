@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import jakarta.annotation.PostConstruct;
 import org.modelmapper.ModelMapper;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class BaseConverter<ENTITY, DTO> {
+public abstract class BaseMapper<ENTITY, DTO> {
 
     @Autowired
     protected ModelMapper mapper;

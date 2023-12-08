@@ -1,6 +1,6 @@
 package com.uniteam.flashmemorizer.service.impl;
 
-import com.uniteam.flashmemorizer.converter.DeckConverter;
+import com.uniteam.flashmemorizer.mapper.DeckMapper;
 import com.uniteam.flashmemorizer.dto.DeckDTO;
 import com.uniteam.flashmemorizer.entity.Deck;
 import com.uniteam.flashmemorizer.exception.DeckNotFoundException;
@@ -22,7 +22,7 @@ public class DeckServiceImpl implements DeckService {
     private DeckRepository deckRepo;
 
     @Autowired
-    private DeckConverter deckConverter;
+    private DeckMapper deckConverter;
 
     @Override
     public DeckDTO add(DeckDTO deckDTO) {

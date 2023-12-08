@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.converter;
+package com.uniteam.flashmemorizer.mapper;
 
 import com.uniteam.flashmemorizer.config.AppConfig;
 import com.uniteam.flashmemorizer.dto.SharedDeckDTO;

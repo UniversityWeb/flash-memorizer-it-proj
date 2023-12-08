@@ -1,6 +1,6 @@
 package com.uniteam.flashmemorizer.service.impl;
 
-import com.uniteam.flashmemorizer.converter.CardConverter;
+import com.uniteam.flashmemorizer.mapper.CardMapper;
 import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.entity.Card;
 import com.uniteam.flashmemorizer.exception.CardNotFoundException;
@@ -22,7 +22,7 @@ public class CardServiceImpl implements CardService {
     private CardRepository cardRepo;
 
     @Autowired
-    private CardConverter cardConverter;
+    private CardMapper cardConverter;
 
     @Override
     public CardDTO add(CardDTO cardDTO) {
