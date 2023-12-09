@@ -32,15 +32,6 @@ public class User implements Serializable {
     @Column(name = "full_name", length = 100)
     private String fullName;
 
-    @Column(name = "registration")
-    private Date registration;
-
-    @Column(name = "last_login")
-    private Date lastLogin;
-
-    @Column(name = "role", length = 45)
-    private String role;
-    
     private boolean isEnabled = false;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)

@@ -65,8 +65,6 @@ public class DeckController {
 
     @PostMapping("/add")
     public String add(@ModelAttribute DeckDTO deck, RedirectAttributes ra) {
-        deck.setCreation(new Date());
-        deck.setModified(new Date());
         try {
             DeckDTO added = deckService.add(deck);
             log.info("Deck added successfully!");
@@ -120,7 +118,6 @@ public class DeckController {
     public String updateDeckOnly(@ModelAttribute DeckForm deckForm, RedirectAttributes ra) {
         final Long deckId = deckForm.getDeck().getId();
         try {
-            deckForm.getDeck().setModified(new Date());
             deckService.update(deckForm.getDeck());
             log.info("Deck with Id {} updated successfully!", deckId);
             ra.addFlashAttribute("successMsg", "Deck updated successfully!");

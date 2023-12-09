@@ -17,8 +17,6 @@ public class UserDTO {
     private String pass;
     private String email;
     private String fullName;
-    private Date registration = new Date();
-    private Date lastLogin = new Date();
     private boolean isEnabled = false;
     private String role;
 }

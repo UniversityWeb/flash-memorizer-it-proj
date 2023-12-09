@@ -58,7 +58,6 @@ public class DeckServiceImpl implements DeckService {
 
         deck.setName( deckDTO.getName() );
         deck.setDesc( deckDTO.getDesc() );
-        deck.setModified( deckDTO.getModified() );
 
         try {
             Deck updated = deckRepo.save(deck);
