@@ -32,7 +32,7 @@ class DeckMapperTest {
                 .build();
 
         // Act
-        DeckDTO deckDTO = deckMapper.convertEntityToDto(deck);
+        DeckDTO deckDTO = deckMapper.toDto(deck);
 
         // Assert
         assertEquals(deckDTO.getId(), deck.getId());
@@ -49,7 +49,7 @@ class DeckMapperTest {
         Deck deck = null;
 
         // Act
-        DeckDTO deckDTO = deckMapper.convertEntityToDto(deck);
+        DeckDTO deckDTO = deckMapper.toDto(deck);
 
         // Assert
         assertNull(deckDTO);
@@ -68,7 +68,7 @@ class DeckMapperTest {
                 .build();
 
         // Act
-        Deck deck = deckMapper.convertDtoToEntity(deckDTO);
+        Deck deck = deckMapper.toEntity(deckDTO);
 
         // Assert
         assertEquals(deck.getId(), deckDTO.getId());
@@ -85,7 +85,7 @@ class DeckMapperTest {
         DeckDTO deckDTO = null;
 
         // Act
-        Deck deck = deckMapper.convertDtoToEntity(deckDTO);
+        Deck deck = deckMapper.toEntity(deckDTO);
 
         // Assert
         assertNull(deck);

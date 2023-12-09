@@ -25,10 +25,10 @@ public class DeckServiceImpl implements DeckService {
 
     @Override
     public DeckDTO add(DeckDTO deckDTO) {
-        Deck deck = deckMapper.convertDtoToEntity(deckDTO);
+        Deck deck = deckMapper.toEntity(deckDTO);
         try {
              Deck added = deckRepo.save(deck);
-             return deckMapper.convertEntityToDto(added);
+             return deckMapper.toDto(added);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -60,7 +60,7 @@ public class DeckServiceImpl implements DeckService {
 
         try {
             Deck updated = deckRepo.save(deck);
-            return deckMapper.convertEntityToDto(updated);
+            return deckMapper.toDto(updated);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -72,7 +72,7 @@ public class DeckServiceImpl implements DeckService {
         List<Deck> decks = deckRepo.findByUserId(userId);
         if (decks == null || decks.isEmpty())
             throw new DeckNotFoundException("Could not find any decks with userId=" + userId);
-        return deckMapper.convertEntityToDto(decks);
+        return deckMapper.toDto(decks);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class DeckServiceImpl implements DeckService {
         Deck deck = deckRepo
                 .findById(id)
                 .orElseThrow(() -> new DeckNotFoundException("Could not find any decks with Id=" + id));
-        return deckMapper.convertEntityToDto(deck);
+        return deckMapper.toDto(deck);
     }
 
     @Override
@@ -88,6 +88,6 @@ public class DeckServiceImpl implements DeckService {
         List<Deck> decks = deckRepo.findByUsername(username);
         if (decks == null || decks.isEmpty())
             throw new DeckNotFoundException("Could not find any decks with username=" + username);
-        return deckMapper.convertEntityToDto(decks);
+        return deckMapper.toDto(decks);
     }
 }

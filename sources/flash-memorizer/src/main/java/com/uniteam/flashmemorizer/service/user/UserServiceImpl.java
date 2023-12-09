@@ -37,10 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO add(UserDTO userDTO) {
-        User user = userMapper.convertDtoToEntity(userDTO);
+        User user = userMapper.toEntity(userDTO);
         try {
             User added = userRepo.save(user);
-            return userMapper.convertEntityToDto(added);
+            return userMapper.toDto(added);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
         try {
             User updated = userRepo.save(user);
-            return userMapper.convertEntityToDto(updated);
+            return userMapper.toDto(updated);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -71,13 +71,13 @@ public class UserServiceImpl implements UserService {
     public UserDTO getById(Long id) throws UserNotFoundException {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Could not find any users with userId=" + id));
-        return userMapper.convertEntityToDto(user);
+        return userMapper.toDto(user);
     }
 
     @Override
     public List<UserDTO> getUsers() {
         List<User> users = userRepo.findAll();
-        return userMapper.convertEntityToDto(users);
+        return userMapper.toDto(users);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUserVerifycationToken(UserDTO theUser, String token) {
-        User user = userMapper.convertDtoToEntity(theUser);
+        User user = userMapper.toEntity(theUser);
         var verificationToken = new VerificationToken(token, user);
         tokenRepository.save(verificationToken);
     }
@@ -163,7 +163,7 @@ public class UserServiceImpl implements UserService {
             tokenRepository.delete(token);
             return Utils.EXPIRED_TOKEN_MSG;
         }
-        UserDTO userDTO = userMapper.convertEntityToDto(user);
+        UserDTO userDTO = userMapper.toDto(user);
         userDTO.setEnabled(true);
         this.updateNotPassword(userDTO);
         return Utils.SUCCESS_TOKEN_MSG;
