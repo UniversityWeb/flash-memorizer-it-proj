@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.service;
+package com.uniteam.flashmemorizer.service.deck;
 
 import com.uniteam.flashmemorizer.dto.DeckDTO;
 

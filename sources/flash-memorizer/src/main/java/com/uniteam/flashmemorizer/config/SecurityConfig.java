@@ -2,7 +2,7 @@ package com.uniteam.flashmemorizer.config;
 
 import com.uniteam.flashmemorizer.handler.CustomLoginSuccessHandler;
 import com.uniteam.flashmemorizer.handler.CustomLogoutSuccessHandler;
-import com.uniteam.flashmemorizer.service.impl.CustomUserDetailsServiceImpl;
+import com.uniteam.flashmemorizer.service.CustomUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

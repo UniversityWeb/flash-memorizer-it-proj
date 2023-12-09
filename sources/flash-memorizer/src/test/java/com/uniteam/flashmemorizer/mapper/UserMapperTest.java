@@ -33,7 +33,7 @@ class UserMapperTest {
                 .build();
 
         // Act
-        UserDTO userDTO = userMapper.convertEntityToDto(user);
+        UserDTO userDTO = userMapper.toDto(user);
 
         // Assert
         assertEquals(userDTO.getId(), user.getId());
@@ -51,7 +51,7 @@ class UserMapperTest {
         User user = null;
 
         // Act
-        UserDTO userDTO = userMapper.convertEntityToDto(user);
+        UserDTO userDTO = userMapper.toDto(user);
 
         // Assert
         assertNull(userDTO);
@@ -71,7 +71,7 @@ class UserMapperTest {
                 .build();
 
         // Act
-        User user = userMapper.convertDtoToEntity(userDTO);
+        User user = userMapper.toEntity(userDTO);
 
         // Assert
         assertEquals(userDTO.getId(), user.getId());
@@ -89,7 +89,7 @@ class UserMapperTest {
         UserDTO userDTO = null;
 
         // Act
-        User user = userMapper.convertDtoToEntity(userDTO);
+        User user = userMapper.toEntity(userDTO);
 
         // Assert
         assertNull(user);

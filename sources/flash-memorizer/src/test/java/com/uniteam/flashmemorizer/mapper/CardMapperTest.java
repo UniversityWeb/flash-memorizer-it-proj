@@ -28,7 +28,7 @@ class CardMapperTest {
                 .build();
 
         // Act
-        CardDTO cardDTO = cardMapper.convertEntityToDto(card);
+        CardDTO cardDTO = cardMapper.toDto(card);
 
         // Assert
         assertEquals(cardDTO.getId(), card.getId());
@@ -43,7 +43,7 @@ class CardMapperTest {
         Card card = null;
 
         // Act
-        CardDTO cardDTO = cardMapper.convertEntityToDto(card);
+        CardDTO cardDTO = cardMapper.toDto(card);
 
         // Assert
         assertNull(cardDTO);
@@ -60,7 +60,7 @@ class CardMapperTest {
                 .build();
 
         // Act
-        Card card = cardMapper.convertDtoToEntity(cardDTO);
+        Card card = cardMapper.toEntity(cardDTO);
 
         // Assert
         assertEquals(cardDTO.getId(), card.getId());
@@ -75,7 +75,7 @@ class CardMapperTest {
         CardDTO cardDTO = null;
 
         // Act
-        Card card = cardMapper.convertDtoToEntity(cardDTO);
+        Card card = cardMapper.toEntity(cardDTO);
 
         // Assert
         assertNull(card);

@@ -58,7 +58,7 @@
                 </div>
                 <div class="modal-footer d-flex">
                     <!-- Buttons for navigating back and taking a new test -->
-                    <a th:href="@{/cards/{deckId}(deckId=${cardReviewForm.deckId})}" class="link-nav">
+                    <a th:href="@{/decks/review/{deckId}(deckId=${cardReviewForm.deckId})}" class="link-nav">
                         <button type="button" class="btn btn-secondary mx-auto btn-nav">Back to learning</button>
                     </a>
                     <a th:href="@{/review/get-review(reviewType=${cardReviewForm.reviewType},deckId=${cardReviewForm.deckId})}" class="link-nav">

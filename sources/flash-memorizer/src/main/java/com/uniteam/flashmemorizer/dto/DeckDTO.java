@@ -15,12 +15,6 @@ public class DeckDTO {
     private Long id;
     private String name;
     private String desc;
-
-    private Date creation = new Date();
-
-    private Date modified = new Date();
-
     private UserDTO user = new UserDTO();
-
     private Integer quantityOfCards;
 }

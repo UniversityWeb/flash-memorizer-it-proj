@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.service;
+package com.uniteam.flashmemorizer.service.user;
 
 import com.uniteam.flashmemorizer.dto.UserDTO;
 import com.uniteam.flashmemorizer.entity.VerificationToken;

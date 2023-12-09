@@ -60,17 +60,6 @@
                             <input type="text" class="deckDescEditor" th:field="*{deck.desc}" maxlength="500"/>
                         </div>
 
-                        <div class="form-row mt-3">
-                            <div class="col">
-                                <label>Creation</label>
-                                <input type="datetime-local" class="form-control" th:value="${#dates.format(deckForm.deck.creation, 'yyyy-MM-dd hh:mm')}" readonly>
-                            </div>
-                            <div class="col">
-                                <label>Modified</label>
-                                <input type="datetime-local" class="form-control" th:value="${#dates.format(deckForm.deck.modified, 'yyyy-MM-dd hh:mm')}" readonly>
-                            </div>
-                        </div>
-
                         <!-- Add card details -->
                         <h4 class="text-center text-primary mt-5">Cards</h4>
 

@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.service.impl;
+package com.uniteam.flashmemorizer.service;
 
 import com.uniteam.flashmemorizer.dto.UserHolder;
 import com.uniteam.flashmemorizer.entity.User;
@@ -31,7 +31,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Unverified account");
         }
 
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USERS"));
 
         return new UserHolder(user, authorities);}
     }

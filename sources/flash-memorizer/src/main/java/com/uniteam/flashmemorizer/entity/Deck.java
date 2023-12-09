@@ -26,12 +26,6 @@ public class Deck implements Serializable {
     @Column(name = "deck_desc", length = 500)
     private String desc;
 
-    @Column(updatable = false)
-    private Date creation = new Date();
-
-    @Column(name = "last_modified")
-    private Date modified = new Date();
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     @EqualsAndHashCode.Exclude

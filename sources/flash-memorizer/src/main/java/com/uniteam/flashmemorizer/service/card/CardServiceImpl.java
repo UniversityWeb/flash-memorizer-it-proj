@@ -1,11 +1,10 @@
-package com.uniteam.flashmemorizer.service.impl;
+package com.uniteam.flashmemorizer.service.card;
 
 import com.uniteam.flashmemorizer.mapper.CardMapper;
 import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.entity.Card;
 import com.uniteam.flashmemorizer.exception.CardNotFoundException;
 import com.uniteam.flashmemorizer.repository.CardRepository;
-import com.uniteam.flashmemorizer.service.CardService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +25,10 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public CardDTO add(CardDTO cardDTO) {
-        Card card = cardMapper.convertDtoToEntity(cardDTO);
+        Card card = cardMapper.toEntity(cardDTO);
         try {
             Card added = cardRepo.save(card);
-            return cardMapper.convertEntityToDto(added);
+            return cardMapper.toDto(added);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -61,7 +60,7 @@ public class CardServiceImpl implements CardService {
 
         try {
             Card updated = cardRepo.save(card);
-            return cardMapper.convertEntityToDto(updated);
+            return cardMapper.toDto(updated);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -71,7 +70,7 @@ public class CardServiceImpl implements CardService {
     @Override
     public List<CardDTO> getByDeckId(Long deckId) {
         List<Card> cards = cardRepo.findByDeckId(deckId);
-        return cardMapper.convertEntityToDto(cards);
+        return cardMapper.toDto(cards);
     }
 
     @Override
@@ -79,7 +78,7 @@ public class CardServiceImpl implements CardService {
         Card card = cardRepo
                 .findById(id)
                 .orElseThrow(() -> new CardNotFoundException("Could not find any decks with Id=" + id));
-        return cardMapper.convertEntityToDto(card);
+        return cardMapper.toDto(card);
     }
 
     @Override

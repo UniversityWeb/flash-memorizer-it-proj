@@ -55,9 +55,6 @@ public class DataInitializer implements CommandLineRunner {
                         .pass(DEFAULT_HASHED_PASS)
                         .email("user1@gmail.com")
                         .fullName("User One")
-                        .registration(new Date(2023, 1, 1, 12, 12, 12))
-                        .lastLogin(new Date(2023, 1, 2, 4, 12, 12))
-                        .role("ADMIN")
                         .isEnabled(true)
                         .build(),
                 User.builder()
@@ -65,9 +62,6 @@ public class DataInitializer implements CommandLineRunner {
                         .pass(DEFAULT_HASHED_PASS)
                         .email("user2@gamil.com")
                         .fullName("User Two")
-                        .registration(new Date(2023, 4, 4, 5, 5, 5))
-                        .lastLogin(new Date(2023, 3, 1, 4, 5, 6))
-                        .role("USERS")
                         .isEnabled(true)
                         .build()
         );
@@ -86,15 +80,11 @@ public class DataInitializer implements CommandLineRunner {
                 Deck.builder()
                         .name("Deck 1")
                         .desc("Deck Desc 1")
-                        .creation(new Date(2023, 1, 1, 12, 0 ,0))
-                        .modified(new Date(2023, 3, 1, 12, 0, 0))
                         .user(user)
                         .build(),
                 Deck.builder()
                         .name("Deck 2")
                         .desc("Deck Desc 2")
-                        .creation(new Date(2023, 1, 1, 12, 0 ,0))
-                        .modified(new Date(2023, 3, 1, 12, 0, 0))
                         .user(user)
                         .build()
         );

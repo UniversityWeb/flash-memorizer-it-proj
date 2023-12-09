@@ -33,7 +33,7 @@ class VerificationTokenMapperTest {
                 .build();
 
         // Act
-        VerificationTokenDTO tokenDTO = tokenMapper.convertEntityToDto(token);
+        VerificationTokenDTO tokenDTO = tokenMapper.toDto(token);
 
         // Assert
         assertEquals(tokenDTO.getId(), token.getId());
@@ -48,7 +48,7 @@ class VerificationTokenMapperTest {
         VerificationToken token = null;
 
         // Act
-        VerificationTokenDTO tokenDTO = tokenMapper.convertEntityToDto(token);
+        VerificationTokenDTO tokenDTO = tokenMapper.toDto(token);
 
         // Assert
         assertNull(tokenDTO);
@@ -65,7 +65,7 @@ class VerificationTokenMapperTest {
                 .build();
 
         // Act
-        VerificationToken token = tokenMapper.convertDtoToEntity(tokenDTO);
+        VerificationToken token = tokenMapper.toEntity(tokenDTO);
 
         // Assert
         assertEquals(tokenDTO.getId(), token.getId());
@@ -80,7 +80,7 @@ class VerificationTokenMapperTest {
         VerificationTokenDTO tokenDTO = null;
 
         // Act
-        VerificationToken token = tokenMapper.convertDtoToEntity(tokenDTO);
+        VerificationToken token = tokenMapper.toEntity(tokenDTO);
 
         // Assert
         assertNull(token);

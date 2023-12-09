@@ -3,7 +3,7 @@ package com.uniteam.flashmemorizer.controller;
 import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.dto.DeckDTO;
 import com.uniteam.flashmemorizer.exception.CardNotFoundException;
-import com.uniteam.flashmemorizer.service.CardService;
+import com.uniteam.flashmemorizer.service.card.CardService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
