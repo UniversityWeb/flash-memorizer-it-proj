@@ -1,11 +1,10 @@
-package com.uniteam.flashmemorizer.service.impl;
+package com.uniteam.flashmemorizer.service.card;
 
 import com.uniteam.flashmemorizer.mapper.CardMapper;
 import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.entity.Card;
 import com.uniteam.flashmemorizer.exception.CardNotFoundException;
 import com.uniteam.flashmemorizer.repository.CardRepository;
-import com.uniteam.flashmemorizer.service.CardService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

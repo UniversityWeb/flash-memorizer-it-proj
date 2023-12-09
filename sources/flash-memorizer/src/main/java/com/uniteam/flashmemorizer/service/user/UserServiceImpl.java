@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.service.impl;
+package com.uniteam.flashmemorizer.service.user;
 
 import com.uniteam.flashmemorizer.mapper.UserMapper;
 import com.uniteam.flashmemorizer.dto.UserDTO;
@@ -12,7 +12,6 @@ import com.uniteam.flashmemorizer.form.ChangePassForm;
 import com.uniteam.flashmemorizer.record.RegistrationRequest;
 import com.uniteam.flashmemorizer.repository.UserRepository;
 import com.uniteam.flashmemorizer.repository.VerificationTokenRepository;
-import com.uniteam.flashmemorizer.service.UserService;
 import com.uniteam.flashmemorizer.utility.Utils;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;

@@ -1,6 +1,5 @@
-package com.uniteam.flashmemorizer.service.impl;
+package com.uniteam.flashmemorizer.service.cardreview;
 
-import com.uniteam.flashmemorizer.service.CardReviewService;
 import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.dto.review.CardReview;
 import com.uniteam.flashmemorizer.customenum.EReview;

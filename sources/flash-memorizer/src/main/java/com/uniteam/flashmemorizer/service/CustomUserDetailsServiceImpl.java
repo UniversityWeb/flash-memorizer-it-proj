@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.service.impl;
+package com.uniteam.flashmemorizer.service;
 
 import com.uniteam.flashmemorizer.dto.UserHolder;
 import com.uniteam.flashmemorizer.entity.User;

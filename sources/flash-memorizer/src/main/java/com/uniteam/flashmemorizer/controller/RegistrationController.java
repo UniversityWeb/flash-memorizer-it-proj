@@ -5,7 +5,6 @@ import com.uniteam.flashmemorizer.entity.User;
 import com.uniteam.flashmemorizer.record.RegistrationRequest;
 import com.uniteam.flashmemorizer.listener.RegistrationCompleteEventListener;
 import com.uniteam.flashmemorizer.entity.VerificationToken;
-import com.uniteam.flashmemorizer.repository.VerificationTokenRepository;
 
 import com.uniteam.flashmemorizer.utility.Utils;
 import jakarta.mail.MessagingException;
@@ -15,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.uniteam.flashmemorizer.event.RegistrationCompleteEvent;
-import com.uniteam.flashmemorizer.service.UserService;
+import com.uniteam.flashmemorizer.service.user.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

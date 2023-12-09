@@ -4,7 +4,7 @@ import com.uniteam.flashmemorizer.dto.UserDTO;
 import com.uniteam.flashmemorizer.exception.PasswordMismatchException;
 import com.uniteam.flashmemorizer.exception.UserNotFoundException;
 import com.uniteam.flashmemorizer.form.ChangePassForm;
-import com.uniteam.flashmemorizer.service.UserService;
+import com.uniteam.flashmemorizer.service.user.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

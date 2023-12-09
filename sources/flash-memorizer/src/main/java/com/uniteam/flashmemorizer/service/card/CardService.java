@@ -1,4 +1,4 @@
-package com.uniteam.flashmemorizer.service;
+package com.uniteam.flashmemorizer.service.card;
 
 
 import com.uniteam.flashmemorizer.dto.CardDTO;
