@@ -51,16 +51,16 @@ public class DataInitializer implements CommandLineRunner {
 
         List<User> users = List.of(
                 User.builder()
-                        .username("username1")
+                        .username("vanan")
                         .pass(DEFAULT_HASHED_PASS)
-                        .email("user1@gmail.com")
+                        .email("vanantran99@gmail.com")
                         .fullName("User One")
                         .isEnabled(true)
                         .build(),
                 User.builder()
-                        .username("username2")
+                        .username("quynhgiao")
                         .pass(DEFAULT_HASHED_PASS)
-                        .email("user2@gamil.com")
+                        .email("quynhgiaooo@gamil.com")
                         .fullName("User Two")
                         .isEnabled(true)
                         .build()
