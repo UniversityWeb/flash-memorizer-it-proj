@@ -39,14 +39,10 @@ class CardRepositoryTest {
                 .pass("test")
                 .email("test123@gmail.com")
                 .fullName("Hoang Long")
-                .registration(new Date(2023, 1, 1))
-                .lastLogin(new Date())
                 .build());
         exitsDeck = deckRepo.save(Deck.builder()
                 .name("Writing set")
                 .desc("Some vocabulary for task 1")
-                .creation(new Date(2023, 1, 1, 1, 1, 1))
-                .modified(new Date())
                 .user(exitsUser)
                 .build());
         exitsCard = cardRepo.save( createCard(exitsDeck) );
