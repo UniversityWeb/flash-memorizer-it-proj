@@ -28,8 +28,6 @@ class UserMapperTest {
                 .pass("hihi1234")
                 .email("hihi@gmail.com")
                 .fullName("Hi Tran")
-                .registration(new Date())
-                .lastLogin(new Date())
                 .build();
 
         // Act
@@ -41,8 +39,6 @@ class UserMapperTest {
         assertEquals(userDTO.getPass(), user.getPass());
         assertEquals(userDTO.getEmail(), user.getEmail());
         assertEquals(userDTO.getFullName(), user.getFullName());
-        assertEquals(userDTO.getRegistration(), user.getRegistration());
-        assertEquals(userDTO.getLastLogin(), user.getLastLogin());
     }
 
     @Test
@@ -66,8 +62,6 @@ class UserMapperTest {
                 .pass("hihi124")
                 .email("hihi@gmail.com")
                 .fullName("Hi Tran")
-                .registration(new Date())
-                .lastLogin(new Date())
                 .build();
 
         // Act
@@ -79,8 +73,6 @@ class UserMapperTest {
         assertEquals(userDTO.getPass(), user.getPass());
         assertEquals(userDTO.getEmail(), user.getEmail());
         assertEquals(userDTO.getFullName(), user.getFullName());
-        assertEquals(userDTO.getRegistration(), user.getRegistration());
-        assertEquals(userDTO.getLastLogin(), user.getLastLogin());
     }
 
     @Test

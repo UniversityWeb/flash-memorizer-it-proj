@@ -26,8 +26,6 @@ class DeckMapperTest {
                 .id(1L)
                 .name("Spring boot application")
                 .desc("This is web application which can help people improve ability to memory")
-                .creation(new Date())
-                .modified(new Date())
                 .user(null)
                 .build();
 
@@ -38,8 +36,6 @@ class DeckMapperTest {
         assertEquals(deckDTO.getId(), deck.getId());
         assertEquals(deckDTO.getName(), deck.getName());
         assertEquals(deckDTO.getDesc(), deck.getDesc());
-        assertEquals(deckDTO.getCreation(), deck.getCreation());
-        assertEquals(deckDTO.getModified(), deck.getModified());
         assertNull(deckDTO.getUser().getId());
     }
 
@@ -62,8 +58,6 @@ class DeckMapperTest {
                 .id(1L)
                 .name("Spring boot application")
                 .desc("This is web application which can help people improve ability to memory")
-                .creation(new Date())
-                .modified(new Date())
                 .user(null)
                 .build();
 
@@ -74,8 +68,6 @@ class DeckMapperTest {
         assertEquals(deck.getId(), deckDTO.getId());
         assertEquals(deck.getName(), deckDTO.getName());
         assertEquals(deck.getDesc(), deckDTO.getDesc());
-        assertEquals(deck.getCreation(), deckDTO.getCreation());
-        assertEquals(deck.getModified(), deckDTO.getModified());
         assertEquals(deck.getUser(), deckDTO.getUser());
     }
 

@@ -26,8 +26,6 @@ class UserRepositoryTest {
                         .pass("test")
                         .email("test123@gmail.com")
                         .fullName("Hoang Long")
-                        .registration(new Date(2023, 1, 1))
-                        .lastLogin(new Date())
                         .build());
     }
 
@@ -40,8 +38,6 @@ class UserRepositoryTest {
                 .pass("test1")
                 .email("test345@gmail.com")
                 .fullName("Hoang Dieu")
-                .registration(new Date(2023, 1, 1))
-                .lastLogin(new Date())
                 .build();
         User savedUser = userRepo.save(user);
 
@@ -54,13 +50,11 @@ class UserRepositoryTest {
     public void testUpdateSuccess() {
         // Act
         exitsUser.setUsername("Changed");
-        exitsUser.setLastLogin(new Date(2023, 2, 2));
 
         User userActual = userRepo.save(exitsUser);
 
         // Assert
         assertEquals(userActual.getUsername(), exitsUser.getUsername());
-        assertEquals(userActual.getLastLogin(), exitsUser.getLastLogin());
     }
 
     @Test

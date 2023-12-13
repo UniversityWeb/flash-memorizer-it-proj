@@ -35,8 +35,6 @@ class DeckRepositoryTest {
                         .pass("test")
                         .email("test123@gmail.com")
                         .fullName("Hoang Long")
-                        .registration(new Date(2023, 1, 1))
-                        .lastLogin(new Date())
                         .build());
         exitsDeck = deckRepo.save(createDeck(exitsUser));
     }
@@ -56,8 +54,6 @@ class DeckRepositoryTest {
         Deck deck = Deck.builder()
                 .name("Writing set")
                 .desc("Some vocabulary for task 1")
-                .creation(new Date(2023, 1, 1, 1, 1, 1))
-                .modified(new Date())
                 .user(user)
                 .build();
         return deckRepo.save(deck);
@@ -68,13 +64,11 @@ class DeckRepositoryTest {
     public void testUpdateSuccess() {
         // Act
         exitsDeck.setDesc("Changed");
-        exitsDeck.setModified(new Date(2023, 2, 2));
 
         Deck deckActual = deckRepo.save(exitsDeck);
 
         // Assert
         assertEquals(deckActual.getDesc(), exitsDeck.getDesc());
-        assertEquals(deckActual.getModified(), exitsDeck.getModified());
     }
 
     @Test
