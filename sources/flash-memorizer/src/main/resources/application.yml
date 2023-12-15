@@ -9,9 +9,9 @@ spring:
         livereload:
             enabled: true
     datasource:
-        url: jdbc:mysql://localhost:3307/FlashMemorizer?allowPublicKeyRetrieval=true&useSSL=false
-        username: root
-        password: root
+        url: jdbc:mysql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}?allowPublicKeyRetrieval=true&useSSL=false
+        username: ${PROD_DB_USER}
+        password: ${PROD_DB_PASS}
     sql:
         init:
             mode: always
@@ -28,5 +28,5 @@ spring:
         suffix: .html
 
 mail:
-    email: vanantran009@gmail.com
-    password: slqohvgrgtqkftbp
+    email: ${PROD_MAIL_EMAIL}
+    password: ${PROD_MAIL_PASSWORD}
