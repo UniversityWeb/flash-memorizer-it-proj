@@ -45,13 +45,13 @@ public class FillBlank implements ReviewStrategy<FillBlankCard> {
     /**
      * Creates a list of words representing hidden words for blanks.
      * Randomly selects words from the original description to form the hidden words.
-     * The number of words is limited to 3 or the number of words in the description minus 1, whichever is smaller.
+     * The number of words is limited to 1 or the number of words in the description minus 1, whichever is smaller.
      *
      * @param desc The original description.
      * @return A list of words representing the hidden words.
      */
     private List<String> generateHiddenWords(String desc) {
-        final int defaultSizeOfHiddenWords = 3;
+        final int defaultSizeOfHiddenWords = 1;
 
         List<String> words = Arrays.asList(desc.split("[\\s.,;!?]+"));
         Collections.shuffle(words);
