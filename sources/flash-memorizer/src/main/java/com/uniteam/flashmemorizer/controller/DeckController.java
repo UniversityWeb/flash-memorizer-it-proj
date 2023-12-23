@@ -66,9 +66,15 @@ public class DeckController {
     public String add(@ModelAttribute DeckDTO deck, RedirectAttributes ra) {
         try {
             DeckDTO added = deckService.add(deck);
-            log.info("Deck added successfully!");
-            ra.addFlashAttribute("successMsg", "Deck added successfully!");
-            return "redirect:/decks/edit/" + added.getId();
+            if (added != null) {
+                log.info("Deck with Id {} added successfully!", added.getId());
+                ra.addFlashAttribute("successMsg", "Deck added successfully!");
+                return "redirect:/decks/edit/" + added.getId();
+            } else {
+                log.error("Deck added unsuccessfully!");
+                ra.addFlashAttribute("errorMsg", "Deck added unsuccessfully!");
+                return "redirect:/decks/new";
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
             ra.addFlashAttribute("errorMsg", "Deck added unsuccessfully!");
@@ -117,9 +123,13 @@ public class DeckController {
     public String updateDeckOnly(@ModelAttribute DeckForm deckForm, RedirectAttributes ra) {
         final Long deckId = deckForm.getDeck().getId();
         try {
-            deckService.update(deckForm.getDeck());
-            log.info("Deck with Id {} updated successfully!", deckId);
-            ra.addFlashAttribute("successMsg", "Deck updated successfully!");
+            if (deckService.update(deckForm.getDeck()) != null) {
+                log.info("Deck with Id {} updated successfully!", deckId);
+                ra.addFlashAttribute("successMsg", "Deck updated successfully!");
+            } else {
+                log.error("Deck with Id {} updated unsuccessfully!", deckId);
+                ra.addFlashAttribute("errorMsg", "Deck updated unsuccessfully!");
+            }
         } catch (DeckNotFoundException e) {
             log.error("Error updating deckForm with Id {}: {}", deckId, e.getMessage());
             ra.addFlashAttribute("errorMsg", e.getMessage());
@@ -130,9 +140,13 @@ public class DeckController {
     @GetMapping("/delete")
     public String delete(@RequestParam Long deckId, RedirectAttributes ra) {
         try {
-            deckService.delete(deckId);
-            log.info("Deck with Id {} deleted successfully!", deckId);
-            ra.addFlashAttribute("successMsg", "Deck deleted successfully!");
+            if (deckService.delete(deckId)) {
+                log.info("Deck with Id {} deleted successfully!", deckId);
+                ra.addFlashAttribute("successMsg", "Deck deleted successfully!");
+            } else {
+                log.error("Deck with Id {} deleted unsuccessfully!", deckId);
+                ra.addFlashAttribute("errorMsg", "Deck deleted unsuccessfully!");
+            }
         } catch (DeckNotFoundException e) {
             log.error("Error deleting deckForm with Id {}: {}", deckId, e.getMessage());
             ra.addFlashAttribute("errorMsg", e.getMessage());

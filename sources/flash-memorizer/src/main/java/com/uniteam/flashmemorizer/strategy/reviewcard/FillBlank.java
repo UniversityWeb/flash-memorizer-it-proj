@@ -4,13 +4,13 @@ import com.uniteam.flashmemorizer.dto.CardDTO;
 import com.uniteam.flashmemorizer.dto.review.FillBlankCard;
 import com.uniteam.flashmemorizer.utility.Utils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FillBlank implements ReviewStrategy<FillBlankCard> {
+
+    private static final int DEFAULT_SIZE_OF_HIDDEN_WORDS = 1;
+    private static final String BLANK_TEXT = "blank-context-for-input";
 
     /**
      * Generates a list of FillBlankCard instances from the given list of CardDTOs.
@@ -28,8 +28,10 @@ public class FillBlank implements ReviewStrategy<FillBlankCard> {
 
     private FillBlankCard mapToFillBlankCard(CardDTO card) {
         String plainDesc = extractPlainDescFromCard(card);
-        List<String> hiddenWords = generateHiddenWords(plainDesc);
-        String descWithBlanks = generateDescWithBlanks(hiddenWords, plainDesc);
+        List<String> words = Arrays.asList(plainDesc.split(" "));
+        PriorityQueue<Integer> hiddenIndexes = generateHiddenIndexes(words.size(), DEFAULT_SIZE_OF_HIDDEN_WORDS);
+        List<String> hiddenWords = getHiddenWords(words, hiddenIndexes);
+        String descWithBlanks = generateDescWithBlanks(words, hiddenIndexes);
 
         return FillBlankCard.builder()
                 .question(card.getTerm())
@@ -42,45 +44,34 @@ public class FillBlank implements ReviewStrategy<FillBlankCard> {
         return Utils.htmlToPlainText(card.getDesc());
     }
 
-    /**
-     * Creates a list of words representing hidden words for blanks.
-     * Randomly selects words from the original description to form the hidden words.
-     * The number of words is limited to 1 or the number of words in the description minus 1, whichever is smaller.
-     *
-     * @param desc The original description.
-     * @return A list of words representing the hidden words.
-     */
-    private List<String> generateHiddenWords(String desc) {
-        final int defaultSizeOfHiddenWords = 1;
+    private PriorityQueue<Integer> generateHiddenIndexes(int size, int numberOfHiddenWords) {
+        List<Integer> originalIndexes = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            originalIndexes.add(i);
+        }
 
-        List<String> words = Arrays.asList(desc.split("[\\s.,;!?]+"));
-        Collections.shuffle(words);
-        words = words.subList(0, Math.min(defaultSizeOfHiddenWords, words.size()));
+        Collections.shuffle(originalIndexes);
+        originalIndexes = originalIndexes.subList(0, numberOfHiddenWords);
 
-        List<String> hiddenWords = Arrays.stream(desc.split(" "))
-                .filter(words::contains)
-                .collect(Collectors.toList());
+        return new PriorityQueue<>(originalIndexes);
+    }
 
+    private List<String> getHiddenWords(List<String> words, PriorityQueue<Integer> hiddenIndexes) {
+        List<String> hiddenWords = new ArrayList<>();
+        List<Integer> indexList = new ArrayList<>(hiddenIndexes);
+        for (Integer index : indexList) {
+            String hiddenWord = words.get(index);
+            hiddenWords.add(hiddenWord);
+        }
         return hiddenWords;
     }
 
-    /**
-     * Creates a description with blank placeholders based on the original description and hidden words.
-     * Replaces the words in the original description with "blank-context-for-input" to indicate blanks.
-     *
-     * @param hiddenWords A list of words representing the hidden words.
-     * @param desc The original description used to create the fill in the blank question.
-     * @return A description with blank placeholders.
-     */
-    private String generateDescWithBlanks(List<String> hiddenWords, String desc) {
-        final String blankText = "blank-context-for-input";
-
-        String descWithBlanks = desc;
-        for (String word : hiddenWords) {
-            descWithBlanks = descWithBlanks.replaceAll("(?<!\\S)" + word + "(?!\\S)", blankText);
+    private String generateDescWithBlanks(List<String> words, PriorityQueue<Integer> hiddenIndexes) {
+        List<Integer> indexList = new ArrayList<>(hiddenIndexes);
+        for (Integer index : indexList) {
+            words.set(index, BLANK_TEXT);
         }
-
-        return descWithBlanks;
+        return String.join(" ", words);
     }
 
     @Override
