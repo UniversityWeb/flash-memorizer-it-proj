@@ -14,15 +14,17 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @ToString
-public class Card implements Serializable {
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "card_term", length = 100)
+    @Lob
+    @Column(name = "card_term", columnDefinition = "LONGTEXT")
     private String term;
 
-    @Column(name = "card_desc", length = 1000)
+    @Lob
+    @Column(name = "card_desc", columnDefinition = "LONGTEXT")
     private String desc;
 
     @ManyToOne(fetch = FetchType.LAZY)

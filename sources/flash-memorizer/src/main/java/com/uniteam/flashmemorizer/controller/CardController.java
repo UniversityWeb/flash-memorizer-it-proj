@@ -39,9 +39,13 @@ public class CardController {
     public String update(@ModelAttribute CardDTO card, RedirectAttributes ra) {
         final Long cardId = card.getId();
         try {
-            cardService.update(card);
-            log.info("Card with Id {} updated successfully!", cardId);
-            ra.addFlashAttribute("successMsg", "Card updated successfully!");
+            if (cardService.update(card) != null) {
+                log.info("Card with Id {} updated successfully!", cardId);
+                ra.addFlashAttribute("successMsg", "Card updated successfully!");
+            } else {
+                log.info("Card with Id {} updated unsuccessfully!", cardId);
+                ra.addFlashAttribute("errorMsg", "Card updated unsuccessfully!");
+            }
         } catch (CardNotFoundException e) {
             log.error("Error updating card with Id {}: {}", cardId, e.getMessage());
             ra.addFlashAttribute("errorMsg", e.getMessage());
@@ -61,9 +65,13 @@ public class CardController {
     public String add(@ModelAttribute CardDTO card, RedirectAttributes ra) {
         final Long cardId = card.getId();
         try {
-            cardService.add(card);
-            log.info("Card with Id {} added successfully!", cardId);
-            ra.addFlashAttribute("successMsg", "Card added successfully!");
+            if (cardService.add(card) != null) {
+                log.info("Card with Id {} added successfully!", cardId);
+                ra.addFlashAttribute("successMsg", "Card added successfully!");
+            } else {
+                log.error("Card added unsuccessfully!");
+                ra.addFlashAttribute("errorMsg", "Card added unsuccessfully!");
+            }
         } catch (Exception e) {
             log.error("Error adding card with Id {}: {}", cardId, e.getMessage());
             ra.addFlashAttribute("errorMsg", e.getMessage());
@@ -74,9 +82,13 @@ public class CardController {
     @GetMapping("/delete")
     public String delete(@RequestParam Long cardId, @RequestParam Long deckId, RedirectAttributes ra) {
         try {
-            cardService.delete(cardId);
-            log.info("Card with Id {} deleted successfully!", cardId);
-            ra.addFlashAttribute("successMsg", "Card deleted successfully!");
+            if (cardService.delete(cardId)) {
+                log.info("Card with Id {} deleted successfully!", cardId);
+                ra.addFlashAttribute("successMsg", "Card deleted successfully!");
+            } else {
+                log.error("Card with Id {} deleted unsuccessfully!", cardId);
+                ra.addFlashAttribute("errorMsg", "Card deleted unsuccessfully!");
+            }
         } catch (CardNotFoundException e) {
             log.error("Error deleting card with Id {}: {}", cardId, e.getMessage());
             ra.addFlashAttribute("errorMsg", e.getMessage());
