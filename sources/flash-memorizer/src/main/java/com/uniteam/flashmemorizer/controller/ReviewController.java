@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -29,10 +30,16 @@ public class ReviewController {
     private CardReviewService reviewService;
 
     @GetMapping("/get-review")
-    public String review(@RequestParam EReview reviewType, @RequestParam Long deckId, Model m
-    ) throws DeckNotFoundException {
+    public String review(@RequestParam EReview reviewType, @RequestParam Long deckId,
+                         Model m, RedirectAttributes ra) throws DeckNotFoundException {
         DeckDTO deck = deckService.getById(deckId);
         List<CardDTO> cards = cardService.getByDeckId(deckId);
+
+        if (cards.size() < CardReviewService.AT_LEAST_CARDS) {
+            ra.addFlashAttribute("errorMsg", "There are not enough cards.");
+            return "redirect:/decks/review/" + deckId;
+        }
+
         var cardReviews = reviewService.generateTest(reviewType, cards);
 
         CardReviewForm cardReviewForm = CardReviewForm.builder()

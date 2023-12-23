@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @ToString
-public class Deck implements Serializable {
+public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +23,8 @@ public class Deck implements Serializable {
     @Column(name = "deck_name", length = 50)
     private String name;
 
-    @Column(name = "deck_desc", length = 500)
+    @Lob
+    @Column(name = "deck_desc", columnDefinition = "LONGTEXT")
     private String desc;
 
     @ManyToOne(fetch = FetchType.LAZY)

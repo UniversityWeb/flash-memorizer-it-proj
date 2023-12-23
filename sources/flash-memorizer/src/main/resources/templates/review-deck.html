@@ -6,14 +6,25 @@
     <link rel="icon" type="image/x-icon" th:href="@{/images/page-icon.svg}">
     <title>Review Decks</title>
     <meta name="description" content="">
-    <link rel="stylesheet" th:href="@{/css/review-deck.css}" href="../static/css/review-deck.css">
+    <link rel="stylesheet" th:href="@{/css/review-deck.css}">
 <body>
-<header>
+<header style="display: flex; align-items: center;">
     <a class="button_back" th:href="@{/decks/get-my-decks}">
         <ion-icon name="chevron-back-outline"></ion-icon>
     </a>
     <h1>FlashCard</h1>
 </header>
+
+<section id="notificationSec">
+    <div class="alert alert-success" id="successMessage" th:if="${successMsg}">
+        <span th:text="${successMsg}">Notify the success message!</span>
+    </div>
+
+    <div class="alert alert-danger" id="errorMessage" th:if="${errorMsg}">
+        <span th:text="${errorMsg}">An error occurred.</span>
+    </div>
+</section>
+
 <section>
     <div class="tools_content">
         <div class="tool_item dropdown">
@@ -80,8 +91,24 @@
     </div>
 </section>
 
-<script th:src="@{/js/review-deck.js}" src="../static/js/review-deck.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script th:src="@{/js/review-deck.js}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const notificationSec = $('#notificationSec')
+        const successMessage = $('#successMessage');
+        const errorMessage = $('#errorMessage');
+
+        if (successMessage.length > 0 || errorMessage.length > 0) {
+            setTimeout(function () {
+                notificationSec.fadeOut('slow');
+            }, 5000);
+        }
+    });
+</script>
 </body>
 </html>
